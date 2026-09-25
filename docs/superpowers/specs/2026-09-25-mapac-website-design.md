@@ -123,7 +123,7 @@ lib/      content/ stripe.ts email.ts validation.ts rate-limit.ts
 | 2024 endorsement lists (Triangle, Triad, Charlotte) | Two cycles old |
 | "There are no upcoming events" widget | Announcing an absence is worse than silence |
 | Feb 2025 Gaza statement, Sept 2024 presidential endorsement, Jan 2026 newsletter | Dated; News ships empty, these can be ported as archive entries on request |
-| Divi theme colors `#ee0d08` `#f35653` `#810003`-adjacent strays | Palette consolidation |
+| Divi theme strays `#ee0d08` `#f35653` `#cf2e2e` `#ea2c59` | Palette consolidation; navy, `#c80f15` and `#810003` are kept as tokens |
 | Four of five loaded typefaces | Type consolidation |
 
 Per-page decisions that follow from this:
@@ -201,5 +201,6 @@ logged. The site is deployable before any credential exists.
 1. Current (2026) leadership roster, to replace the 2025 names
 2. Stripe publishable/secret keys and webhook signing secret
 3. Resend (or Mailchimp) API key
-4. Whether to port the three archived news items
-5. Higher-resolution logo than `mapacLogog.png` if one exists
+4. Stripe price ID for the recurring/monthly donation product
+5. Whether to port the three archived news items
+6. Higher-resolution logo than `mapacLogog.png` if one exists
