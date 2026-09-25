@@ -90,26 +90,72 @@ lib/      content/ stripe.ts email.ts validation.ts rate-limit.ts
 - **Mission:** "The Muslim American Public Affairs Council (MAPAC) is an organization
   that aims to lobby at all levels of government on behalf of our growing American
   Muslim community."
-- **Six goals:** educate and encourage American Muslims to partake in the US political
-  process; lobby politicians at all levels; enhance political empowerment of American
-  Muslims; educate American policy makers on issues of concern to Muslims; present
-  Islamic tradition, values, history and culture; foster inter-religious and
-  inter-ethnic understanding.
+- **Eight goals** (the About page lists two the home page omits): educate and encourage
+  American Muslims to partake in the US political process; lobby politicians at all
+  levels; enhance political empowerment of American Muslims; educate American policy
+  makers on issues of concern to Muslims; present Islamic tradition, values, history and
+  culture; foster inter-religious and inter-ethnic understanding; strive for assurance of
+  basic human rights of all Americans and of all Muslims; strive to eliminate any
+  vestiges of discrimination on the basis of race, gender, religion or ethnicity.
+- **"What We Do" paragraph:** MAPAC focuses on politics and its effect on Muslims in
+  America; supports Islamic Organizations in fulfilling their responsibility for
+  religious affairs; and supports other Muslim organizations in areas such as peace and
+  human rights.
 - **Three pillars:** Elevating Diversity, Advocating for Inclusivity, Fostering Dialogue
-- **Governance:** four bodies — Board of Trustees, Executive Committee, General Body
-  (voting and associate members), Appointed Committees
-- **Leadership (2025):** Dr. Nabil Abdel-Rahman (Chair), Dr. Hisham Mohamed (Vice-Chair),
-  Mohamed Kenawey (Treasurer), Ahmad Herzallah (Secretary); trustees Majid Abdel-Raziq,
+- **Governance:** four bodies, with verbatim bylaws descriptions available on the About
+  page — Board of Trustees (7–15 elected members drawn from Voting Members, three-year
+  terms), Executive Committee (President as chair, Standing Committee Chairs, Secretary,
+  Treasurer; trustees are pro forma members), General Body (Voting Members who pay dues
+  and accept the constitution; Associate Members, who may be non-Muslim, are exempt from
+  voting and ineligible for BOT/EC but receive all other benefits including discounted
+  event entry), Appointed Committees (ad hoc or standing, to distribute day-to-day tasks
+  and provide leadership training)
+- **Leadership (2025) — 12 named members.** The page text says the board has 7–15
+  elected members; twelve are named, so twelve ship. Do not invent a thirteenth.
+  Officers: Dr. Nabil Abdel-Rahman (Chair), Dr Hisham Mohamed (Vice-Chair),
+  Mohamed Kenawey (Treasurer), Ahmad Herzallah (Secretary). Trustees: Majid Abdel-Raziq,
   Dr. Mimi Aljabi, Nigel Edwards, Dr. Ahmed Khalil, Mohammad Omary, Shahid Shibbir,
   Manal Sidawi, Amjad Syam. Executive Committee: Nigel Edwards (President),
-  Dr. Mimi Aljabi (PAC Chair), Dr. Ahmed Khalil (Education Chair),
-  Shahid Shibbir (Media Chair), Majid Abdel-Raziq (PR & Outreach Chair).
-- **Endorsement framework:** ten core principles; eight evaluation criteria (Engagement
-  with the Muslim Community, Qualifications and Capabilities, Commitment to Civil
-  Liberties, Integrity and Ethics, Policy Positions/Platform/Vision, Performance Record,
-  Stance on Foreign Policy, Electability and Campaign Standing); scoring rubrics for
-  local/city/county, judiciary, state legislature, state executive, federal legislature
+  Dr. Mimi Aljabi (Chair, Political Action Committee), Dr. Ahmed Khalil (Chair,
+  Education Committee), Shahid Shibbir (Chair, Media Committee), Majid Abdel-Raziq
+  (Chair, Public Relations & Outreach Committee).
+- **Outgoing trustees acknowledged** (12, evergreen recognition, not an event):
+  Dr. Khodr Zaarour, Dr. Faisal Syed, Aisha Shoman, Kanwal Naiyar, Ford Chambliss,
+  Jihad Shawwa, Musa Lipford, Elham Idris, Fatima Anam, Khalid Awan, Sohaila Dar,
+  Zainab Abdul-Qaabidh Amir.
+- **Endorsement framework.** The authoritative source is
+  `MAPAC-2026-Endorsement-Guide.pdf` (10 pages), linked from the old Endorsement Guide
+  page. It contains substantially more than the web page showed:
+  - **Eight evaluation criteria**, each with a "most favorable description" of what a
+    top score looks like: Engagement with the Muslim Community, Qualifications and
+    Capabilities, Commitment to Civil Liberties, Integrity and Ethics, Policy
+    Positions/Platform/Vision, Performance Record, Stance on Foreign Policy,
+    Electability and Campaign Standing
+  - **A 1–5 scoring scale:** 1 Very Poor, 2 Poor, 3 Fair, 4 Good, 5 Excellent
+  - **Weighted rubrics for five office levels**, each totalling 100 points. Weight
+    factors (×5 for percentage points), in criterion order as listed above:
+    - Local, City, and County Officials — 4, 2, 2, 3, 3, 3, 1, 2
+    - Judiciary — 3, 3, 4, 4, 1, 2, 1, 2
+    - State Legislature — 3, 3, 3, 2, 3, 3, 1, 2
+    - State Executive Officials — 4, 3, 3, 3, 2, 2, 1, 2
+    - Federal Legislature — 3, 2, 2, 3, 2, 2, 4, 2
+  - **Two hard rules:** candidates exhibiting hatred or contempt toward Muslims or their
+    faith are automatically disqualified, as are candidates who support or condone the
+    persecution or killing of Muslims abroad. Endorsements also require direct contact
+    between the endorsement team and the candidate.
+  - **Office-level evaluation guidance** for local offices (NC's Mayor-Council-City
+    Manager form), city councils and county commissioners, boards of education, judicial
+    offices (NC elects all judges; appellate vs. lower court skill sets differ), and
+    state legislative offices
+  - **"Tools for Researching Candidates"** — ten categories of voter-research
+    resources with links (Ballotpedia, VoteSmart, PolitiFact, FactCheck.org, FEC,
+    `ncleg.gov/Legislation/Votes`, PBS North Carolina, WUNC Politics Podcast, Do Politics
+    Better, FiveThirtyEight, Cook Political Report). This is evergreen civic-education
+    content and is worth a section of its own.
 - **Contact:** P.O. Box 18196, Raleigh, NC 27619 · (984) 254-7441 · mail@mapacnc.com
+  - **Discrepancy to confirm:** the website footer says ZIP **27619**; the endorsement
+    guide PDF letterhead says **27606**. The site ships 27619 (the more recently updated
+    surface) and this is an open item for MAPAC.
 - **Social:** Instagram @mapacnc · Facebook MuslimAmericanPublicAffairsC0UNCIL ·
   YouTube UCtmElPYwXVIYh3OqXhTU9vg
 - **Logo:** port `mapacLogog.png` from the old site
@@ -132,8 +178,29 @@ Per-page decisions that follow from this:
   non-empty. Empty array means the section does not exist — no "check back soon"
   placeholder, no stale cycle.
 - **News** ships with zero posts; the index handles the empty state.
+- **Home** shows the six goals from the old home page; **About** shows all eight. Both
+  read from the same `getGoals()` collection, with Home slicing to the first six.
 - **Leadership** heading is year-labeled ("Leadership — 2025") so the roster is
   visibly dated rather than silently wrong.
+
+## Endorsement guide detail level
+
+**Decision:** match the old website's disclosure level. The Elections page publishes:
+
+- The condensed principles paragraph the old Endorsement Guide page already displayed
+- All eight criteria **with** their "most favorable description" from the PDF
+- The 1–5 scoring scale and both automatic-disqualification rules
+- All five weighted rubric tables
+- The office-level evaluation guidance
+- The "Tools for Researching Candidates" resources
+- A prominent link to `MAPAC-2026-Endorsement-Guide.pdf`
+
+It does **not** reproduce the detailed values outline from pages 1–2 of the PDF (positions
+on abortion, sexuality and gender education, Patriot Act and FISA repeal, boycott and
+divestment). Those remain available in the linked PDF, exactly as MAPAC currently
+publishes them. Rationale: the gap between the website's condensed paragraph and the
+PDF's full outline is a deliberate editorial choice by the organization, and a rebuild
+should not silently change what the site amplifies. Revisit only at the board's request.
 
 ## Design system
 
@@ -199,8 +266,12 @@ logged. The site is deployable before any credential exists.
 ## Open items for MAPAC
 
 1. Current (2026) leadership roster, to replace the 2025 names
-2. Stripe publishable/secret keys and webhook signing secret
-3. Resend (or Mailchimp) API key
-4. Stripe price ID for the recurring/monthly donation product
-5. Whether to port the three archived news items
-6. Higher-resolution logo than `mapacLogog.png` if one exists
+2. Confirmation of the full board roster — the site names 12 members; verify none are missing
+3. Stripe publishable/secret keys and webhook signing secret
+4. Resend (or Mailchimp) API key
+5. Stripe price ID for the recurring/monthly donation product
+6. Whether to port the three archived news items
+7. Higher-resolution logo than `mapacLogog.png` if one exists
+8. Confirm the P.O. Box ZIP: website says 27619, endorsement guide PDF says 27606
+9. Whether the board wants the PDF's full values outline published on-page as well
+   (currently no — see "Endorsement guide detail level")
