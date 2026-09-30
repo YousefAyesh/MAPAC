@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { GetInvolvedForm } from '@/components/forms/GetInvolvedForm'
 import { Section } from '@/components/ui/Section'
 import { site } from '@/data/site'
+import { isEmailConfigured } from '@/lib/email'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -14,6 +16,8 @@ const SOCIAL = [
 ]
 
 export default function ContactPage() {
+  const configured = isEmailConfigured()
+
   return (
     <Section aria-labelledby="contact-heading">
       <h1 id="contact-heading" className="text-3xl">
@@ -71,6 +75,13 @@ export default function ContactPage() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="sm:col-span-2">
+          <h2 className="text-lg">Send us a message</h2>
+          <div className="mt-4 max-w-xl">
+            <GetInvolvedForm configured={configured} />
+          </div>
         </div>
       </div>
     </Section>
