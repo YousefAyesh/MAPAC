@@ -6,6 +6,7 @@ import { officeGuidance, researchCategories } from '@/data/guidance'
 import { leadershipYear, outgoingTrustees, trustees } from '@/data/leadership'
 import { pillars } from '@/data/pillars'
 import type { ContentSource } from '../source'
+import { getNews, getNewsBySlug } from './news'
 
 export const localSource: ContentSource = {
   async getGoals() {
@@ -47,10 +48,6 @@ export const localSource: ContentSource = {
   async getEndorsements() {
     return endorsements
   },
-  async getNews() {
-    throw new Error('not implemented: getNews (Task 9)')
-  },
-  async getNewsBySlug() {
-    throw new Error('not implemented: getNewsBySlug (Task 9)')
-  },
+  getNews,
+  getNewsBySlug,
 }
