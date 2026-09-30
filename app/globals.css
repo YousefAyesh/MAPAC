@@ -37,6 +37,11 @@
 
 :root {
   color-scheme: light;
+  /* Defaults for light (white/surface) backgrounds. Crimson on navy / navy-800 / navy-700
+     measures 2.72:1 / 2.22:1 / 1.73:1 — all below the 3:1 WCAG 1.4.11 non-text minimum —
+     and navy headings on a navy background are ~1:1. Dark sections must add .on-navy. */
+  --focus-ring: var(--color-crimson);
+  --heading-color: var(--color-navy);
 }
 
 body {
@@ -48,13 +53,21 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  color: var(--color-navy);
+  color: var(--heading-color);
   letter-spacing: -0.01em;
+}
+
+/* Apply to any navy / navy-800 / navy-700 section so headings and the focus ring stay
+   visible — see the contrast note on :root above. Structural, so it can't be forgotten
+   on an individual heading. */
+.on-navy {
+  --focus-ring: #ffffff;
+  --heading-color: #ffffff;
 }
 
 /* Focus rings are never removed without replacement — spec accessibility requirement */
 :focus-visible {
-  outline: 3px solid var(--color-crimson);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
   border-radius: 2px;
 }
