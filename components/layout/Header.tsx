@@ -18,7 +18,7 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="flex min-h-11 items-center rounded px-3 text-sm font-medium text-white/90 hover:bg-navy-800 hover:text-white on-navy"
+                  className="flex min-h-11 items-center rounded px-3 text-sm font-medium text-white/90 hover:bg-navy-800 hover:text-white"
                 >
                   {item.label}
                 </Link>

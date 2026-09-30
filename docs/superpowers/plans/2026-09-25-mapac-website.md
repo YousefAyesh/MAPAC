@@ -21,10 +21,17 @@
 > two custom properties, `--focus-ring` (default crimson) and `--heading-color` (default
 > navy), and a plain class **`.on-navy`** that flips both to white.
 >
-> **Every element painted `bg-navy`, `bg-navy-800` or `bg-navy-700` MUST also carry
-> `on-navy`.** Without it, keyboard focus is near-invisible on that surface and any
-> heading inside it renders navy-on-navy (~1:1), which the axe gate in Task 28 will fail
-> the build on. Tasks 10, 11 and 13 below have been updated accordingly.
+> **Every CONTAINER that paints a navy region for other content to sit inside MUST also
+> carry `on-navy`** — the header, the mobile nav panel, the hero, the CTA band, the footer,
+> and the skip link. Without it, keyboard focus is near-invisible on that surface and any
+> heading inside renders navy-on-navy (~1:1), which the axe gate in Task 28 will fail the
+> build on.
+>
+> **The inverse trap:** do NOT put `on-navy` on a small navy element such as `Button`'s
+> `secondary` variant. The ring uses `outline-offset`, so it renders just *outside* the
+> element on the parent's background — normally white, where a white ring is 1:1 and
+> invisible. Such an element inherits `on-navy` from its navy ancestor when it sits in one,
+> which is already correct in both cases. Scope the class to containers only.
 >
 > `Button` also gained a discriminated-union prop type (anchor attributes when `href` is
 > present, button attributes when absent), rest-prop spreading on all three branches, a
@@ -6450,8 +6457,15 @@ Every box above is checked, and:
 - [ ] No page scrolls horizontally at 400px width
 - [ ] No component imports from `data/leadership`, `data/governance` or `data/pillars`
       directly — all content reads go through `lib/content`
-- [ ] Every element painted `bg-navy` / `bg-navy-800` / `bg-navy-700` also carries
-      `on-navy`. Verify mechanically:
-      `grep -rn "bg-navy" app components | grep -v "on-navy"` must return nothing
+- [ ] Every navy CONTAINER carries `on-navy`; no small navy element (e.g. a Button
+      variant) does. Verify mechanically — note `hover:bg-navy-*` is excluded, since a
+      hover background on a child of a navy container inherits correctly:
+
+      ```bash
+      # navy containers missing on-navy -- must be empty
+      grep -rnE '(^|[" ])bg-navy' app components --include='*.tsx' | grep -v on-navy
+      # on-navy applied to a Button variant -- must be empty
+      grep -n "on-navy" components/ui/Button.tsx | grep -v '^\s*[0-9]*: *//'
+      ```
 - [ ] Keyboard focus is clearly visible on the navy header, hero, CTA band and footer
       — checked by tabbing through the real rendered page, not just by axe

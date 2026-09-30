@@ -6,7 +6,11 @@ type Variant = 'primary' | 'secondary' | 'ghost'
 
 const VARIANTS: Record<Variant, string> = {
   primary: 'bg-crimson text-white hover:bg-crimson-deep',
-  secondary: 'bg-navy text-white hover:bg-navy-800 on-navy',
+  // Deliberately NOT on-navy. The focus ring uses outline-offset, so it renders just
+  // OUTSIDE the button, on the parent's background -- usually white. A white ring there
+  // would be 1:1 and invisible. When this button sits inside a navy section, it inherits
+  // that section's on-navy and gets a white ring on navy (16.15:1) correctly.
+  secondary: 'bg-navy text-white hover:bg-navy-800',
   ghost: 'bg-transparent text-navy border border-border-subtle hover:bg-surface',
 }
 
