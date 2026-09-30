@@ -1,6 +1,7 @@
 import { criteria, principles, rubrics } from '@/data/endorsement'
 import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
+import { officeGuidance, researchCategories } from '@/data/guidance'
 import { leadershipYear, outgoingTrustees, trustees } from '@/data/leadership'
 import { pillars } from '@/data/pillars'
 import type { ContentSource } from '../source'
@@ -37,10 +38,10 @@ export const localSource: ContentSource = {
     return rubrics
   },
   async getOfficeGuidance() {
-    throw new Error('not implemented: getOfficeGuidance (Task 7)')
+    return officeGuidance
   },
   async getResearchCategories() {
-    throw new Error('not implemented: getResearchCategories (Task 7)')
+    return researchCategories
   },
   async getEndorsements() {
     throw new Error('not implemented: getEndorsements (Task 8)')
