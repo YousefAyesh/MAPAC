@@ -4,9 +4,9 @@
 
 **Goal:** Build MAPAC's website as a Next.js 15 site carrying over all evergreen content from mapacnc.com, excluding every outdated election artifact.
 
-**Architecture:** Static-rendered App Router pages read all content through a single swappable adapter (`lib/content`) so Sanity can replace in-repo data later without touching components. Four Node-runtime API routes handle forms and Stripe Checkout; each integration degrades to a working fallback when its env var is absent, so the site is deployable before any credential exists.
+**Architecture:** Next 16 was installed by `create-next-app@latest` in Task 1; the plan was written against 15 and the two agree on every API used here. Static-rendered App Router pages read all content through a single swappable adapter (`lib/content`) so Sanity can replace in-repo data later without touching components. Four Node-runtime API routes handle forms and Stripe Checkout; each integration degrades to a working fallback when its env var is absent, so the site is deployable before any credential exists.
 
-**Tech Stack:** Next.js 15 (App Router), TypeScript, Tailwind CSS v4, `next/font` (Source Serif 4 + Inter), Vitest, Playwright + axe-core, Stripe Checkout, Resend.
+**Tech Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS v4, `next/font` (Source Serif 4 + Inter), Vitest, Playwright + axe-core, Stripe Checkout, Resend.
 
 **Spec:** `docs/superpowers/specs/2026-09-25-mapac-website-design.md`
 
@@ -1850,6 +1850,11 @@ News also ships with zero posts. The index must handle that without looking brok
 ```bash
 npm install gray-matter next-mdx-remote
 ```
+
+If `next-mdx-remote/rsc` fails to render under Next 16 (it peers only on `react: >=16`, so
+it is not version-locked, but this is unverified), switch to `@next/mdx` — the
+Vercel-maintained alternative, versioned in lockstep with Next — and report the swap as a
+concern rather than working around it.
 
 - [ ] **Step 2: Write the failing test**
 

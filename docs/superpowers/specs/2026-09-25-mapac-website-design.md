@@ -21,9 +21,19 @@ asks people to join without saying what joining means.
 - Stripe account, email service keys, and any credentials are supplied by MAPAC.
   Every integration is built behind env vars and degrades gracefully without them.
 
+## Framework version
+
+`create-next-app@latest` installs **Next.js 16.3.7** (React 19.2.8, Tailwind 4.3.3), not
+the 15 this spec originally named. Next 16 is accepted rather than downgraded: it is the
+current stable release, and every API this design relies on — async `params`/`searchParams`,
+`MetadataRoute`, `next/font`, `next/image`, `generateStaticParams`, Node-runtime route
+handlers — is unchanged across the 15→16 boundary. The one unverified dependency is
+`next-mdx-remote` (peers only `react: >=16`, so not version-locked); if it misbehaves under
+Next 16, `@next/mdx` is the maintained fallback.
+
 ## Stack
 
-- Next.js 15, App Router, TypeScript
+- Next.js 16 (App Router), TypeScript — see "Framework version" below
 - Tailwind CSS v4 (`@theme` tokens in `app/globals.css`)
 - `next/font` self-hosting Source Serif 4 + Inter
 - Vercel deployment; static rendering by default, Node runtime only on API routes
