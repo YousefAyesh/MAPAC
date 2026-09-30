@@ -1,3 +1,4 @@
+import { criteria, principles, rubrics } from '@/data/endorsement'
 import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
 import { leadershipYear, outgoingTrustees, trustees } from '@/data/leadership'
@@ -27,13 +28,13 @@ export const localSource: ContentSource = {
     return leadershipYear
   },
   async getPrinciples() {
-    throw new Error('not implemented: getPrinciples (Task 7)')
+    return principles
   },
   async getCriteria() {
-    throw new Error('not implemented: getCriteria (Task 7)')
+    return criteria
   },
   async getRubrics() {
-    throw new Error('not implemented: getRubrics (Task 7)')
+    return rubrics
   },
   async getOfficeGuidance() {
     throw new Error('not implemented: getOfficeGuidance (Task 7)')
