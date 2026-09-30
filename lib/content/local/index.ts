@@ -1,4 +1,6 @@
 import { goals } from '@/data/goals'
+import { governanceBodies } from '@/data/governance'
+import { leadershipYear, outgoingTrustees, trustees } from '@/data/leadership'
 import { pillars } from '@/data/pillars'
 import type { ContentSource } from '../source'
 
@@ -10,19 +12,19 @@ export const localSource: ContentSource = {
     return pillars
   },
   async getGovernanceBodies() {
-    throw new Error('not implemented: getGovernanceBodies (Task 6)')
+    return governanceBodies
   },
   async getTrustees() {
-    throw new Error('not implemented: getTrustees (Task 6)')
+    return trustees
   },
   async getExecutiveCommittee() {
-    throw new Error('not implemented: getExecutiveCommittee (Task 6)')
+    return trustees.filter((p) => p.executiveRole)
   },
   async getOutgoingTrustees() {
-    throw new Error('not implemented: getOutgoingTrustees (Task 6)')
+    return outgoingTrustees
   },
   async getLeadershipYear() {
-    throw new Error('not implemented: getLeadershipYear (Task 6)')
+    return leadershipYear
   },
   async getPrinciples() {
     throw new Error('not implemented: getPrinciples (Task 7)')
