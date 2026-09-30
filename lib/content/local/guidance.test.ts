@@ -13,9 +13,22 @@ describe('office guidance', () => {
     ])
   })
 
-  it('gives every office group at least one evaluation criterion', async () => {
+  it('gives every office group substantive prose guidance', async () => {
     const guidance = await content.getOfficeGuidance()
-    expect(guidance.every((g) => g.criteria.length > 0)).toBe(true)
+    expect(guidance.every((g) => g.intro.length > 80)).toBe(true)
+  })
+
+  it('carries the bulleted criteria for the four groups the guide lists them for', async () => {
+    // The guide's "Appropriate criteria for evaluation include:" lists appear under
+    // every group EXCEPT Local offices, whose guidance is prose only. An empty array
+    // there is correct; inventing bullets to fill it would fabricate MAPAC's positions.
+    const guidance = await content.getOfficeGuidance()
+    const byId = Object.fromEntries(guidance.map((g) => [g.id, g.criteria.length]))
+    expect(byId.local).toBe(0)
+    expect(byId.councils).toBeGreaterThan(0)
+    expect(byId.education).toBeGreaterThan(0)
+    expect(byId.judicial).toBeGreaterThan(0)
+    expect(byId['state-legislative']).toBeGreaterThan(0)
   })
 })
 

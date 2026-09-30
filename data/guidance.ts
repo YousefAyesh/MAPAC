@@ -6,11 +6,13 @@ export const officeGuidance: OfficeGuidance[] = [
     office: 'Local offices',
     intro:
       'Virtually all North Carolina municipalities have adopted the Mayor-Council-City Manager form of government. Under this arrangement a Mayor has few direct powers, and to be effective must rely on their vision for effective city government, consensus-building skills, and communication skills. Mayoral candidates should be evaluated accordingly.',
-    criteria: [
-      'A clear vision for effective city government',
-      'Consensus-building skills',
-      'Communication skills',
-    ],
+    /**
+     * Intentionally empty. The endorsement guide gives Local offices prose guidance
+     * only -- its "Appropriate criteria for evaluation include:" bulleted list appears
+     * under City Councils and County Commissioners, not here. Do not synthesise
+     * bullets from the intro sentence; the intro IS the published guidance.
+     */
+    criteria: [],
   },
   {
     id: 'councils',

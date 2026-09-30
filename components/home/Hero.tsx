@@ -12,7 +12,7 @@ export function Hero() {
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">{site.mission}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button href="/get-involved">Get involved</Button>
-          <Button href="/donate" variant="ghost" className="!border-white/30 !text-white hover:!bg-white/10">
+          <Button href="/donate" variant="ghost" className="!border-white/40 !text-white hover:!bg-white/10">
             Donate
           </Button>
         </div>

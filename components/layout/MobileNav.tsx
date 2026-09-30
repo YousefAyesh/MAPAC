@@ -17,12 +17,29 @@ export function MobileNav() {
         className="inline-flex min-h-11 min-w-11 items-center justify-center rounded text-white"
       >
         <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
           {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
         </svg>
       </button>
 
-      <div id="mobile-nav-panel" hidden={!open} className="absolute left-0 right-0 top-full bg-navy pb-4 on-navy">
+      {/*
+        Deliberately NOT wrapped in <nav aria-label="Primary">. The desktop nav already
+        owns that landmark name, and a second one would trip axe's landmark-unique rule.
+        This is a disclosure panel; its toggle button is labelled and its links are
+        reachable, so no landmark is required here.
+      */}
+      <div
+        id="mobile-nav-panel"
+        hidden={!open}
+        className="on-navy absolute left-0 right-0 top-full bg-navy pb-4"
+      >
         <ul className="flex flex-col px-5">
           {primaryNav.map((item) => (
             <li key={item.href}>
