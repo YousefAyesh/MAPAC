@@ -1,0 +1,73 @@
+import type { Metadata } from 'next'
+import { DonationForm } from '@/components/forms/DonationForm'
+import { Section } from '@/components/ui/Section'
+import { site } from '@/data/site'
+import { isRecurringConfigured, isStripeConfigured } from '@/lib/stripe'
+
+export const metadata: Metadata = {
+  title: 'Donate',
+  description: 'Support MAPAC with a one-time or monthly donation.',
+}
+
+export default function DonatePage() {
+  const stripeReady = isStripeConfigured()
+
+  return (
+    <Section aria-labelledby="donate-heading">
+      <h1 id="donate-heading" className="text-3xl">
+        Donate to MAPAC
+      </h1>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed">
+        Your support funds MAPAC&rsquo;s advocacy, candidate evaluation, and civic education work
+        across North Carolina.
+      </p>
+
+      <div className="mt-10 grid gap-12 lg:grid-cols-2">
+        <div>
+          {stripeReady ? (
+            <DonationForm recurringAvailable={isRecurringConfigured()} />
+          ) : (
+            <div className="rounded-lg border border-border-subtle bg-surface p-6">
+              <h2 className="text-lg">Donate by mail or phone</h2>
+              <p className="mt-3 leading-relaxed">
+                Online donations are being set up. In the meantime, you can send a check to the
+                address below, or call us and we will take your donation directly.
+              </p>
+              <address className="mt-4 not-italic leading-relaxed">
+                {site.address.line1}
+                <br />
+                {site.address.line2}
+              </address>
+              <p className="mt-3">
+                <a href={site.phoneHref} className="font-medium text-crimson-deep underline">
+                  {site.phone}
+                </a>
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h2 className="text-lg">Prefer to mail a check?</h2>
+          <p className="mt-3 leading-relaxed">Make it payable to MAPAC and send it to:</p>
+          <address className="mt-3 not-italic leading-relaxed">
+            {site.address.line1}
+            <br />
+            {site.address.line2}
+          </address>
+          <p className="mt-6 text-sm leading-relaxed">
+            Questions about giving? Email{' '}
+            <a href={`mailto:${site.email}`} className="font-medium text-crimson-deep underline">
+              {site.email}
+            </a>{' '}
+            or call{' '}
+            <a href={site.phoneHref} className="font-medium text-crimson-deep underline">
+              {site.phone}
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+    </Section>
+  )
+}
