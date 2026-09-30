@@ -1,4 +1,5 @@
 import { criteria, principles, rubrics } from '@/data/endorsement'
+import { endorsements } from '@/data/endorsements'
 import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
 import { officeGuidance, researchCategories } from '@/data/guidance'
@@ -44,7 +45,7 @@ export const localSource: ContentSource = {
     return researchCategories
   },
   async getEndorsements() {
-    throw new Error('not implemented: getEndorsements (Task 8)')
+    return endorsements
   },
   async getNews() {
     throw new Error('not implemented: getNews (Task 9)')
