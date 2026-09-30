@@ -10,6 +10,28 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-25-mapac-website-design.md`
 
+> ### Deviation log — read before Tasks 10, 11 and 13
+>
+> A code-quality review of Tasks 2-3 found that a single hardcoded focus-ring colour
+> cannot meet WCAG 1.4.11 on both surfaces: crimson on white is 5.94:1, but crimson on
+> navy `#022047` is only **2.72:1** (navy-800 2.22:1, navy-700 1.73:1) against a 3:1
+> floor. White clears it on navy (16.15:1) but fails on white.
+>
+> The implemented `app/globals.css` therefore differs from Task 2 as written. It defines
+> two custom properties, `--focus-ring` (default crimson) and `--heading-color` (default
+> navy), and a plain class **`.on-navy`** that flips both to white.
+>
+> **Every element painted `bg-navy`, `bg-navy-800` or `bg-navy-700` MUST also carry
+> `on-navy`.** Without it, keyboard focus is near-invisible on that surface and any
+> heading inside it renders navy-on-navy (~1:1), which the axe gate in Task 28 will fail
+> the build on. Tasks 10, 11 and 13 below have been updated accordingly.
+>
+> `Button` also gained a discriminated-union prop type (anchor attributes when `href` is
+> present, button attributes when absent), rest-prop spreading on all three branches, a
+> scheme-aware external-link test, a default `type="button"`, and disabled styling.
+> A `lib/cn.ts` helper wrapping `tailwind-merge` now composes classes in all four
+> primitives, so a caller's `className` reliably wins.
+
 **Phases:** Each phase ends with the site building and deployable.
 - Phase 0 (Tasks 1–3): scaffold, tokens, UI primitives
 - Phase 1 (Tasks 4–9): content layer
@@ -2111,7 +2133,9 @@ export function SkipLink() {
   return (
     <a
       href="#main"
-      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-navy focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+      // on-navy is unconditional: the ring only renders while focused, and while
+      // focused this element's own background IS navy, so the ring must be white.
+      className="on-navy sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-navy focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
     >
       Skip to content
     </a>
@@ -2149,7 +2173,7 @@ export function MobileNav() {
         </svg>
       </button>
 
-      <div id="mobile-nav-panel" hidden={!open} className="absolute left-0 right-0 top-full bg-navy pb-4">
+      <div id="mobile-nav-panel" hidden={!open} className="on-navy absolute left-0 right-0 top-full bg-navy pb-4">
         <ul className="flex flex-col px-5">
           {primaryNav.map((item) => (
             <li key={item.href}>
@@ -2179,7 +2203,7 @@ import { MobileNav } from './MobileNav'
 
 export function Header() {
   return (
-    <header className="relative bg-navy">
+    <header className="on-navy relative bg-navy">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <Link href="/" className="flex items-baseline gap-2 text-white">
           <span className="font-serif text-xl font-semibold tracking-tight">{site.shortName}</span>
@@ -2245,7 +2269,7 @@ const SOCIAL: { label: string; href: string }[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-navy px-5 py-14 text-white sm:px-8">
+    <footer className="on-navy bg-navy px-5 py-14 text-white sm:px-8">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-3">
         <div>
           <p className="font-serif text-lg font-semibold text-white">{site.shortName}</p>
@@ -2418,7 +2442,7 @@ import { site } from '@/data/site'
 
 export function Hero() {
   return (
-    <section className="bg-navy px-5 py-20 sm:px-8 sm:py-28">
+    <section className="on-navy bg-navy px-5 py-20 sm:px-8 sm:py-28">
       <div className="mx-auto max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
           {site.name}
@@ -2513,10 +2537,11 @@ import { Button } from '@/components/ui/Button'
 
 export function CtaBand() {
   return (
-    <section className="bg-navy px-5 py-16 sm:px-8">
+    <section className="on-navy bg-navy px-5 py-16 sm:px-8">
       <div className="mx-auto flex max-w-4xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl !text-white">Connect with us</h2>
+          {/* on-navy on the section already flips --heading-color to white. */}
+          <h2 className="text-2xl">Connect with us</h2>
           <p className="mt-2 max-w-md text-white/80">
             Join MAPAC as a member or sign up for our contact list to stay informed.
           </p>
@@ -3007,7 +3032,12 @@ export default async function ElectionsPage() {
           values and American constitutional ideals.
         </p>
         <div className="mt-6">
-          <Button href={GUIDE_PDF_URL} variant="ghost">
+          <Button
+            href={GUIDE_PDF_URL}
+            variant="ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Read the full 2026 Endorsement Guide (PDF)
           </Button>
         </div>
@@ -6379,3 +6409,8 @@ Every box above is checked, and:
 - [ ] No page scrolls horizontally at 400px width
 - [ ] No component imports from `data/leadership`, `data/governance` or `data/pillars`
       directly — all content reads go through `lib/content`
+- [ ] Every element painted `bg-navy` / `bg-navy-800` / `bg-navy-700` also carries
+      `on-navy`. Verify mechanically:
+      `grep -rn "bg-navy" app components | grep -v "on-navy"` must return nothing
+- [ ] Keyboard focus is clearly visible on the navy header, hero, CTA band and footer
+      — checked by tabbing through the real rendered page, not just by axe
