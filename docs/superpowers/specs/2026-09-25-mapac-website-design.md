@@ -55,6 +55,19 @@ lib/content/
 Migrating to Sanity later means adding `lib/content/sanity/` implementing the same
 interface and changing one export in `index.ts`. No component changes.
 
+**Two caveats on that promise**, raised in review of this layer and worth knowing before
+the Sanity adapter is written:
+
+1. **No preview or pagination hooks.** A CMS-backed source will eventually want
+   `getNews({ preview })` or `{ limit, cursor }`. Adding an options bag to a method
+   signature *is* a call-site-visible change, so that specific extension is not covered by
+   the one-export promise. Not pre-built here — with two posts and no CMS it would be
+   speculative — but it is a known future signature change rather than a surprise.
+2. **`NewsItem.body` is MDX-shaped by contract.** It is a string ready for `<MDXRemote>`.
+   Sanity stores rich text as portable text, so its adapter owns serializing to that same
+   shape. The alternative — returning raw blocks and giving the renderer a second code
+   path — is explicitly not the contract. This is documented on the type itself.
+
 ## Routes
 
 ```

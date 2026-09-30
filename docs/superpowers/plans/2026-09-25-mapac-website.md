@@ -2043,7 +2043,48 @@ Expected: no output. If anything matches, that method was missed.
 Run: `npm test`
 Expected: all tests pass (34 total)
 
-- [ ] **Step 10: Commit**
+- [ ] **Step 10: Add the stub tripwire**
+
+Task 9 is the last task that replaces a `not implemented` stub. Add a test that fails if
+any stub ever survives, so a forgotten one is a fast isolated signal rather than a
+build-time surprise on an unrelated page.
+
+Create `lib/content/completeness.test.ts`:
+
+```ts
+import { describe, it, expect } from 'vitest'
+import { content } from '@/lib/content'
+
+describe('ContentSource completeness', () => {
+  it('has no method left throwing "not implemented"', async () => {
+    const names = Object.keys(content) as (keyof typeof content)[]
+    expect(names.length).toBe(15)
+
+    const stubs: string[] = []
+    for (const name of names) {
+      try {
+        // getNewsBySlug is the only method taking an argument; a miss returns null.
+        await (content[name] as (arg?: unknown) => Promise<unknown>)('nonexistent-slug')
+      } catch (error) {
+        if (error instanceof Error && error.message.includes('not implemented')) {
+          stubs.push(name)
+        } else {
+          throw error
+        }
+      }
+    }
+
+    expect(stubs, `these ContentSource methods are still stubs: ${stubs.join(', ')}`).toEqual([])
+  })
+})
+```
+
+- [ ] **Step 11: Run it**
+
+Run: `npm test -- completeness`
+Expected: `1 passed`. A failure names exactly which methods are still stubs.
+
+- [ ] **Step 12: Commit**
 
 ```bash
 git add -A

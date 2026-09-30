@@ -61,6 +61,11 @@ export type Endorsement = {
 
 export type ResourceLink = {
   label: string
+  /**
+   * Absent when the endorsement guide names a resource without linking out
+   * (e.g. "Official campaign websites"). Consumers MUST render the label as
+   * plain text in that case, never as an <a> with an undefined href.
+   */
   url?: string
 }
 
@@ -86,6 +91,15 @@ export type NewsItem = {
   /** ISO date. */
   date: string
   summary: string
-  /** Rendered MDX body. Absent on index listings. */
+  /**
+   * Content serialized ready for this site's MDX renderer — i.e. a string that can be
+   * passed straight to `<MDXRemote source={...} />`. Absent on index listings, which
+   * strip it.
+   *
+   * This is a contract, not an implementation detail: a CMS-backed source stores rich
+   * text as structured blocks (Sanity uses portable text), so its adapter is responsible
+   * for serializing to this same shape rather than returning raw blocks. Otherwise the
+   * rendering component would need a second, different renderer.
+   */
   body?: string
 }
