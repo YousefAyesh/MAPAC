@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# controller scratch (also keeps Tailwind from scanning future tasks' code blocks)
+.plan-tasks/

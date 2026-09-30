@@ -1,4 +1,11 @@
-@import "tailwindcss";
+/*
+ * source(none) + explicit @source: without this, Tailwind v4 scans the whole project
+ * and generates utilities for every class name mentioned in docs/ markdown code blocks,
+ * bloating the bundle and making "does this class generate?" checks meaningless.
+ */
+@import "tailwindcss" source(none);
+@source "../app";
+@source "../components";
 
 @theme {
   /* Brand — carried from mapacnc.com, contrast-verified */
