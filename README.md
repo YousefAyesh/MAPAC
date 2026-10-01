@@ -90,7 +90,7 @@ how it will actually ship: with none of them set.
 | `CONTACT_TO_EMAIL` | Defaults to `mail@mapacnc.com` |
 | `STRIPE_SECRET_KEY` | Donate page shows the mail-a-check path, no dead button |
 | `STRIPE_WEBHOOK_SECRET` | Webhook returns "not configured" instead of failing |
-| `NEXT_PUBLIC_SITE_URL` | Dev defaults to `http://localhost:3000`. **A production build fails without it** (see below) |
+| `NEXT_PUBLIC_SITE_URL` | Falls back to Vercel's own deployment URL, then fails the build. Set it to `https://mapacnc.com` so links point at the real domain |
 
 ### Credentials need a rebuild
 
