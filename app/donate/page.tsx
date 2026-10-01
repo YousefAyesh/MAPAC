@@ -48,14 +48,19 @@ export default function DonatePage() {
         </div>
 
         <div>
-          <h2 className="text-lg">Prefer to mail a check?</h2>
-          <p className="mt-3 leading-relaxed">Send it to:</p>
-          <address className="mt-3 not-italic leading-relaxed">
-            {site.address.line1}
-            <br />
-            {site.address.line2}
-          </address>
-          <p className="mt-6 text-sm leading-relaxed">
+          {/* When Stripe is off, the fallback card already shows the mailing address. */}
+          {stripeReady && (
+            <>
+              <h2 className="text-lg">Prefer to mail a check?</h2>
+              <p className="mt-3 leading-relaxed">Send it to:</p>
+              <address className="mt-3 not-italic leading-relaxed">
+                {site.address.line1}
+                <br />
+                {site.address.line2}
+              </address>
+            </>
+          )}
+          <p className={`${stripeReady ? 'mt-6 ' : ''}text-sm leading-relaxed`}>
             Questions about giving? Email{' '}
             <a href={`mailto:${site.email}`} className="font-medium text-crimson-deep underline">
               {site.email}

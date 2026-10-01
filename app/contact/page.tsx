@@ -77,12 +77,16 @@ export default function ContactPage() {
           </ul>
         </div>
 
-        <div className="sm:col-span-2">
-          <h2 className="text-lg">Send us a message</h2>
-          <div className="mt-4 max-w-xl">
-            <GetInvolvedForm configured={configured} />
+        {/* Without an email provider the form's fallback would just repeat the phone and
+            email shown above, so the section is omitted entirely in that state. */}
+        {configured && (
+          <div className="sm:col-span-2">
+            <h2 className="text-lg">Send us a message</h2>
+            <div className="mt-4 max-w-xl">
+              <GetInvolvedForm configured />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Section>
   )
