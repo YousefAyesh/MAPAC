@@ -6,7 +6,12 @@ export function RubricTable({ rubric }: { rubric: Rubric }) {
   return (
     <div>
       <h3 className="text-lg">{rubric.office}</h3>
-      <div className="mt-3 overflow-x-auto">
+      <div
+        className="mt-3 overflow-x-auto"
+        tabIndex={0}
+        role="region"
+        aria-label={`Scoring rubric for ${rubric.office}, scrollable`}
+      >
         <table className="w-full min-w-[34rem] border-collapse text-sm">
           <caption className="sr-only">
             Scoring rubric for {rubric.office}: weight factor and percentage points per criterion.
