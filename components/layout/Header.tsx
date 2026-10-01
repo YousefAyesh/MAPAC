@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { primaryNav } from '@/data/nav'
 import { site } from '@/data/site'
 import { MobileNav } from './MobileNav'
@@ -7,9 +8,21 @@ export function Header() {
   return (
     <header className="relative bg-navy on-navy">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-baseline gap-2 text-white">
-          <span className="font-serif text-xl font-semibold tracking-tight">{site.shortName}</span>
-          <span className="hidden text-xs text-white/70 lg:inline">{site.name}</span>
+        <Link href="/" className="flex items-center gap-3 text-white">
+          <Image
+            src="/logo.png"
+            alt=""
+            width={40}
+            height={40}
+            className="h-10 w-auto"
+            priority
+          />
+          <span className="flex flex-col leading-tight">
+            <span className="font-serif text-xl font-semibold tracking-tight">
+              {site.shortName}
+            </span>
+            <span className="hidden text-xs text-white/70 lg:inline">{site.name}</span>
+          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden md:block">
