@@ -8,6 +8,7 @@ import {
   SCORING_SCALE,
 } from '@/data/endorsement'
 import { endorsements } from '@/data/endorsements'
+import { events, upcomingEvents } from '@/data/events'
 import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
 import { officeGuidance, researchCategories } from '@/data/guidance'
@@ -64,6 +65,9 @@ export const localSource: ContentSource = {
   },
   async getResearchCategories() {
     return researchCategories
+  },
+  async getUpcomingEvents() {
+    return upcomingEvents(events)
   },
   async getEndorsements() {
     return endorsements

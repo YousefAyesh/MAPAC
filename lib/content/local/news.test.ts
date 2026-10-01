@@ -46,3 +46,23 @@ Body`
     expect(() => parseNewsFile('nodate.mdx', raw)).toThrow(/nodate\.mdx.*date/i)
   })
 })
+
+describe('getNews index projection', () => {
+  it('keeps every field except body, so new fields are not silently dropped', () => {
+    const raw = `---
+title: T
+date: 2026-01-05
+summary: S
+sourceUrl: https://example.org/statement.pdf
+sourceLabel: Read the full statement (PDF)
+---
+Body text`
+    const item = parseNewsFile('t.mdx', raw)
+    expect(item.sourceUrl).toBe('https://example.org/statement.pdf')
+    expect(item.sourceLabel).toBe('Read the full statement (PDF)')
+
+    const { body, ...indexed } = item
+    expect(body).toBeTruthy()
+    expect(indexed.sourceUrl).toBe('https://example.org/statement.pdf')
+  })
+})

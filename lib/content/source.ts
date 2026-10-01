@@ -1,6 +1,7 @@
 import type {
   Criterion,
   Endorsement,
+  EventItem,
   Goal,
   GovernanceBody,
   NewsItem,
@@ -48,6 +49,8 @@ export type ContentSource = {
   getOfficeGuidance(): Promise<OfficeGuidance[]>
   /** Voter-research resources from the endorsement guide. */
   getResearchCategories(): Promise<ResearchCategory[]>
+  /** Upcoming events only, soonest first. Empty means the page mentions no events. */
+  getUpcomingEvents(): Promise<EventItem[]>
   /** Empty array means the Elections page renders no endorsements section. */
   getEndorsements(): Promise<Endorsement[]>
   /** Newest first. Bodies omitted. */

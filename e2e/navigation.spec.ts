@@ -94,3 +94,36 @@ test.describe('mobile navigation', () => {
     ).toBeVisible()
   })
 })
+
+test.describe('latest carousel', () => {
+  test('shows recent news and never announces an absence of events', async ({ page }) => {
+    await page.goto('/')
+    const carousel = page.locator('[aria-roledescription="carousel"]')
+    await expect(carousel).toHaveCount(1)
+    // The old WordPress site rendered a widget saying it had none. That is worse than
+    // silence: it tells a visitor only that the organisation looks inactive.
+    await expect(page.getByText(/no upcoming events/i)).toHaveCount(0)
+  })
+
+  test('rotation can be paused, and arrows change the slide', async ({ page }) => {
+    await page.goto('/')
+    const pause = page.getByRole('button', { name: /pause automatic rotation/i })
+    await expect(pause).toBeVisible()
+    await pause.click()
+    await expect(page.getByRole('button', { name: /play automatic rotation/i })).toBeVisible()
+
+    const first = await page.locator('[aria-roledescription="slide"]:not([hidden]) h3').innerText()
+    await page.getByRole('button', { name: 'Next' }).click()
+    const second = await page.locator('[aria-roledescription="slide"]:not([hidden]) h3').innerText()
+    expect(second).not.toBe(first)
+  })
+
+  test('hidden slides keep their links out of the tab order', async ({ page }) => {
+    await page.goto('/')
+    const hiddenLinks = page.locator('[aria-roledescription="slide"][hidden] a')
+    const n = await hiddenLinks.count()
+    for (let i = 0; i < n; i++) {
+      await expect(hiddenLinks.nth(i)).toBeHidden()
+    }
+  })
+})

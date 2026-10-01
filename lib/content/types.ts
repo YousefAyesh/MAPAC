@@ -91,6 +91,10 @@ export type NewsItem = {
   /** ISO date. */
   date: string
   summary: string
+  /** Link to MAPAC's own source document, where the statement lives as a PDF. */
+  sourceUrl?: string
+  /** Label for that link. Defaults are not invented; absent means no link is shown. */
+  sourceLabel?: string
   /**
    * Content serialized ready for this site's MDX renderer — i.e. a string that can be
    * passed straight to `<MDXRemote source={...} />`. Absent on index listings, which
@@ -121,4 +125,17 @@ export type Photo = {
   group: string
   /** Photographer credit, where the image carries one. */
   credit?: string
+}
+
+export type EventItem = {
+  id: string
+  title: string
+  /** ISO date, YYYY-MM-DD. Events on or after today are "upcoming". */
+  date: string
+  /** Human-readable time, e.g. "7:00 PM". Optional. */
+  time?: string
+  location?: string
+  description?: string
+  /** Registration or details link. */
+  url?: string
 }

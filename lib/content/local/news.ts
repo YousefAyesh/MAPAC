@@ -29,6 +29,8 @@ export function parseNewsFile(filename: string, raw: string): NewsItem {
     title: data.title.trim(),
     date,
     summary: typeof data.summary === 'string' ? data.summary.trim() : '',
+    ...(typeof data.sourceUrl === 'string' ? { sourceUrl: data.sourceUrl.trim() } : {}),
+    ...(typeof data.sourceLabel === 'string' ? { sourceLabel: data.sourceLabel.trim() } : {}),
     body,
   }
 }
@@ -54,7 +56,14 @@ async function readAll(): Promise<NewsItem[]> {
 /** Newest first, bodies stripped for the index. */
 export async function getNews(): Promise<NewsItem[]> {
   const posts = await readAll()
-  return posts.map(({ slug, title, date, summary }) => ({ slug, title, date, summary }))
+  // Strip only `body`, rather than listing the fields to keep. Hand-picking fields means
+  // every new one added to NewsItem is silently dropped from the index -- which is
+  // exactly what happened to sourceUrl/sourceLabel.
+  return posts.map((post) => {
+    const copy = { ...post }
+    delete copy.body
+    return copy
+  })
 }
 
 export async function getNewsBySlug(slug: string): Promise<NewsItem | null> {
