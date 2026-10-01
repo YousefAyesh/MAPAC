@@ -2,7 +2,7 @@
 
 The website for the Muslim American Public Affairs Council (mapacnc.com).
 
-Next.js 15 (App Router), TypeScript, Tailwind CSS v4. Content lives in this repo; no CMS.
+Next.js 16 (App Router), TypeScript, Tailwind CSS v4. Content lives in this repo; no CMS.
 
 ## Running it
 
@@ -22,9 +22,11 @@ build on any WCAG A or AA violation.
 
 ## Editing content
 
-All site content is in `data/` and `content/`. Components never read these directly —
-they go through `lib/content`, so content can later move to a CMS without touching any
-component.
+All site content is in `data/` and `content/`. Pages and components read MAPAC's
+published content (goals, roster, endorsement guide, endorsements, news) only through
+`lib/content`, so it can later move to a CMS without touching any component. The
+exceptions are site configuration, not content: `data/site.ts` (address, phone, email,
+social links), `data/nav.ts`, and the `HOME_GOAL_COUNT` layout constant in `data/goals.ts`.
 
 | What | Where |
 | --- | --- |
@@ -90,6 +92,14 @@ how it will actually ship: with none of them set.
 | `STRIPE_WEBHOOK_SECRET` | Webhook returns "not configured" instead of failing |
 | `NEXT_PUBLIC_SITE_URL` | Dev defaults to `http://localhost:3000`. **A production build fails without it** (see below) |
 
+### Credentials need a rebuild
+
+`isStripeConfigured()` and `isEmailConfigured()` are evaluated at build time, because
+`/donate`, `/contact` and `/get-involved` are statically prerendered. **Adding a
+credential therefore requires a rebuild and redeploy, not just setting the environment
+variable.** Until then the site keeps serving the "unconfigured" pages. The same applies to
+`NEXT_PUBLIC_SITE_URL`, which `next build` refuses to run without in production.
+
 ### Stripe setup
 
 1. Put the secret key in `STRIPE_SECRET_KEY`. One-time and monthly giving both turn on
@@ -101,6 +111,18 @@ how it will actually ship: with none of them set.
 
 Donation amounts are validated server-side in `lib/donation.ts`. The client's amount is
 never trusted. Minimum $1, maximum $25,000.
+
+### Resend setup
+
+1. Create a Resend API key and put it in `RESEND_API_KEY`. Redeploy (see above).
+2. **Verify a sending domain before launch.** `lib/email.ts` sends from Resend's shared
+   `onboarding@resend.dev` address, which Resend only lets deliver to the email address the
+   Resend account itself was registered with. If that account is not registered to
+   `mail@mapacnc.com` (or whatever `CONTACT_TO_EMAIL` is), every form submission will
+   fail once a key is added: Resend rejects it, MAPAC receives nothing, and the only trace
+   is a server-side log line (the visitor just sees the "we could not send your message"
+   fallback). Verify `mapacnc.com` in Resend and change `FROM` in `lib/email.ts` to an address
+   on it, or register the Resend account to the receiving address.
 
 ## Adding a CMS later
 

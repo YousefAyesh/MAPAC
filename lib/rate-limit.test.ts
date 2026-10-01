@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
-import { checkRateLimit, __resetRateLimit } from './rate-limit'
+import { checkRateLimit, __resetRateLimit, __bucketCount } from './rate-limit'
 
 describe('checkRateLimit', () => {
   beforeEach(() => {
@@ -40,5 +40,20 @@ describe('checkRateLimit', () => {
     expect(result.ok).toBe(false)
     expect(result.retryAfterSeconds).toBeGreaterThan(0)
     expect(result.retryAfterSeconds).toBeLessThanOrEqual(60)
+  })
+
+  it('prunes expired buckets when a new one is added', () => {
+    for (let i = 0; i < 50; i++) checkRateLimit(`old-${i}`, { limit: 5, windowMs: 60_000 })
+    expect(__bucketCount()).toBe(50)
+    vi.advanceTimersByTime(60_001)
+    checkRateLimit('fresh', { limit: 5, windowMs: 60_000 })
+    expect(__bucketCount()).toBe(1)
+  })
+
+  it('keeps unexpired buckets when pruning', () => {
+    checkRateLimit('a', { limit: 5, windowMs: 60_000 })
+    vi.advanceTimersByTime(30_000)
+    checkRateLimit('b', { limit: 5, windowMs: 60_000 })
+    expect(__bucketCount()).toBe(2)
   })
 })

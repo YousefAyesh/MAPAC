@@ -20,7 +20,11 @@ type Entry = {
  */
 const buckets = new Map<string, Entry>()
 
-/** Test-only hook. */
+/** Test-only hooks. */
+export function __bucketCount() {
+  return buckets.size
+}
+
 export function __resetRateLimit() {
   buckets.clear()
 }
@@ -30,6 +34,11 @@ export function checkRateLimit(key: string, { limit, windowMs }: Options): Resul
   const entry = buckets.get(key)
 
   if (!entry || now >= entry.resetAt) {
+    // Starting a new window is the one moment the map grows, so prune expired buckets
+    // here; otherwise every distinct client IP would stay in memory until a redeploy.
+    for (const [k, e] of buckets) {
+      if (now >= e.resetAt) buckets.delete(k)
+    }
     buckets.set(key, { count: 1, resetAt: now + windowMs })
     return { ok: true, retryAfterSeconds: 0 }
   }
