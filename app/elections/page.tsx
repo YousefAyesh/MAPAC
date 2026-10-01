@@ -6,12 +6,6 @@ import { ResearchResources } from '@/components/elections/ResearchResources'
 import { RubricTable } from '@/components/elections/RubricTable'
 import { Button } from '@/components/ui/Button'
 import { Section } from '@/components/ui/Section'
-import {
-  DISQUALIFICATIONS,
-  ENDORSEMENT_REQUIREMENT,
-  GUIDE_PDF_URL,
-  SCORING_SCALE,
-} from '@/data/endorsement'
 import { content } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -21,10 +15,15 @@ export const metadata: Metadata = {
 }
 
 export default async function ElectionsPage() {
-  const [principles, rubrics] = await Promise.all([
-    content.getPrinciples(),
-    content.getRubrics(),
-  ])
+  const [principles, rubrics, scoringScale, disqualifications, requirement, guideUrl] =
+    await Promise.all([
+      content.getPrinciples(),
+      content.getRubrics(),
+      content.getScoringScale(),
+      content.getDisqualifications(),
+      content.getEndorsementRequirement(),
+      content.getEndorsementGuideUrl(),
+    ])
 
   return (
     <>
@@ -38,7 +37,7 @@ export default async function ElectionsPage() {
         </p>
         <div className="mt-6">
           <Button
-            href={GUIDE_PDF_URL}
+            href={guideUrl}
             variant="ghost"
             target="_blank"
             rel="noopener noreferrer"
@@ -71,9 +70,9 @@ export default async function ElectionsPage() {
         <p className="mt-3 max-w-3xl leading-relaxed">
           Candidates are scored on eight criteria according to how favorably they align with
           MAPAC&rsquo;s criteria. Each criterion is scored from 1 to 5:{' '}
-          {SCORING_SCALE.map((s) => `${s.score} ${s.label}`).join(', ')}.
+          {scoringScale.map((s) => `${s.score} ${s.label}`).join(', ')}.
         </p>
-        <p className="mt-3 max-w-3xl leading-relaxed">{ENDORSEMENT_REQUIREMENT}</p>
+        <p className="mt-3 max-w-3xl leading-relaxed">{requirement}</p>
         <CriteriaAccordion />
       </Section>
 
@@ -82,7 +81,7 @@ export default async function ElectionsPage() {
           Automatic disqualification
         </h2>
         <ul className="mt-6 max-w-3xl space-y-4">
-          {DISQUALIFICATIONS.map((rule) => (
+          {disqualifications.map((rule) => (
             <li
               key={rule.slice(0, 24)}
               className="border-l-4 border-crimson bg-white p-5 leading-relaxed"

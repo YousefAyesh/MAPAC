@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { content } from '@/lib/content'
+import { content, groupByCycle, sortEndorsements } from '@/lib/content'
 import type { Endorsement } from '@/lib/content/types'
-import { groupByCycle, sortEndorsements } from '@/data/endorsements'
 
 describe('endorsements', () => {
   it('ships empty, so the Elections page renders no endorsements section', async () => {

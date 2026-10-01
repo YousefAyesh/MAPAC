@@ -10,6 +10,7 @@ import type {
   Principle,
   ResearchCategory,
   Rubric,
+  ScoreLevel,
 } from './types'
 
 /**
@@ -32,6 +33,17 @@ export type ContentSource = {
   getPrinciples(): Promise<Principle[]>
   getCriteria(): Promise<Criterion[]>
   getRubrics(): Promise<Rubric[]>
+  /** The 1-5 scale each criterion is scored on, lowest first. */
+  getScoringScale(): Promise<ScoreLevel[]>
+  /** The hard rules that rule a candidate out of endorsement. */
+  getDisqualifications(): Promise<string[]>
+  /** The sentence stating what MAPAC requires before it endorses. */
+  getEndorsementRequirement(): Promise<string>
+  /**
+   * Where the full endorsement guide PDF lives. A content item, not a constant: the guide
+   * is reissued each cycle and its file would move with the CMS's asset storage.
+   */
+  getEndorsementGuideUrl(): Promise<string>
   /** Office-level evaluation guidance from the endorsement guide. */
   getOfficeGuidance(): Promise<OfficeGuidance[]>
   /** Voter-research resources from the endorsement guide. */

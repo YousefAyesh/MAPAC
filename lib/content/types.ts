@@ -103,3 +103,9 @@ export type NewsItem = {
    */
   body?: string
 }
+
+/** One step on the guide's 1-5 scoring scale. */
+export type ScoreLevel = {
+  score: number
+  label: string
+}

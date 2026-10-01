@@ -8,3 +8,4 @@ import type { ContentSource } from './source'
 export const content: ContentSource = localSource
 
 export * from './types'
+export * from './endorsements'

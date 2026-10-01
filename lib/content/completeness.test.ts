@@ -4,7 +4,7 @@ import { content } from '@/lib/content'
 describe('ContentSource completeness', () => {
   it('has no method left throwing "not implemented"', async () => {
     const names = Object.keys(content) as (keyof typeof content)[]
-    expect(names.length).toBe(15)
+    expect(names.length).toBe(19)
 
     const stubs: string[] = []
     for (const name of names) {

@@ -1,6 +1,5 @@
 import { Section } from '@/components/ui/Section'
-import { groupByCycle } from '@/data/endorsements'
-import { content } from '@/lib/content'
+import { content, groupByCycle } from '@/lib/content'
 
 export async function EndorsementsSection() {
   const endorsements = await content.getEndorsements()

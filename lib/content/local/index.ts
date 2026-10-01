@@ -1,4 +1,12 @@
-import { criteria, principles, rubrics } from '@/data/endorsement'
+import {
+  criteria,
+  DISQUALIFICATIONS,
+  ENDORSEMENT_REQUIREMENT,
+  GUIDE_PDF_URL,
+  principles,
+  rubrics,
+  SCORING_SCALE,
+} from '@/data/endorsement'
 import { endorsements } from '@/data/endorsements'
 import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
@@ -38,6 +46,18 @@ export const localSource: ContentSource = {
   },
   async getRubrics() {
     return rubrics
+  },
+  async getScoringScale() {
+    return [...SCORING_SCALE]
+  },
+  async getDisqualifications() {
+    return [...DISQUALIFICATIONS]
+  },
+  async getEndorsementRequirement() {
+    return ENDORSEMENT_REQUIREMENT
+  },
+  async getEndorsementGuideUrl() {
+    return GUIDE_PDF_URL
   },
   async getOfficeGuidance() {
     return officeGuidance

@@ -72,3 +72,33 @@ describe('principles', () => {
     expect(principles.length).toBeGreaterThan(0)
   })
 })
+
+describe('endorsement guide content', () => {
+  it('returns the 1-5 scoring scale, lowest first', async () => {
+    const scale = await content.getScoringScale()
+    expect(scale.map((s) => s.score)).toEqual([1, 2, 3, 4, 5])
+    expect(scale[0].label).toBe('Very Poor')
+    expect(scale[4].label).toBe('Excellent')
+  })
+
+  it('returns both automatic-disqualification rules', async () => {
+    const rules = await content.getDisqualifications()
+    expect(rules).toHaveLength(2)
+    expect(rules[0]).toMatch(/hatred or contempt towards Muslims/)
+    expect(rules[1]).toMatch(/persecution or killing of Muslims abroad/)
+  })
+
+  it('returns the direct-contact endorsement requirement', async () => {
+    expect(await content.getEndorsementRequirement()).toMatch(/direct contact/)
+  })
+
+  it('returns an https URL for the endorsement guide PDF', async () => {
+    expect(await content.getEndorsementGuideUrl()).toMatch(/^https:\/\/.+\.pdf$/)
+  })
+
+  it('does not let callers mutate the source data', async () => {
+    const rules = await content.getDisqualifications()
+    rules.pop()
+    expect(await content.getDisqualifications()).toHaveLength(2)
+  })
+})
