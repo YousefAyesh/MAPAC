@@ -9,6 +9,7 @@ const ROUTES = [
   '/news',
   '/donate',
   '/contact',
+  '/gallery',
   '/privacy-policy',
 ]
 

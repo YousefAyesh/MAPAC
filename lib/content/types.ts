@@ -109,3 +109,14 @@ export type ScoreLevel = {
   score: number
   label: string
 }
+
+export type Photo = {
+  id: string
+  src: string
+  /** Describes only what is visibly in the frame. Never asserts a name. */
+  alt: string
+  width: number
+  height: number
+  /** Grouping label used by the gallery. */
+  group: string
+}

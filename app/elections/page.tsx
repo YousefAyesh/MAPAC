@@ -5,7 +5,9 @@ import { OfficeGuidance } from '@/components/elections/OfficeGuidance'
 import { ResearchResources } from '@/components/elections/ResearchResources'
 import { RubricTable } from '@/components/elections/RubricTable'
 import { Button } from '@/components/ui/Button'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photos } from '@/data/photos'
 import { content } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -48,6 +50,17 @@ export default async function ElectionsPage() {
       </Section>
 
       <EndorsementsSection />
+
+      <Section aria-labelledby="engagement-photo" className="!pt-0">
+        <h2 id="engagement-photo" className="sr-only">
+          MAPAC at work
+        </h2>
+        <Photo
+          photo={photos.dinnerHallFlags}
+          aspect="aspect-[21/9]"
+          sizes="(max-width: 1024px) 100vw, 64rem"
+        />
+      </Section>
 
       <Section tinted aria-labelledby="principles-heading">
         <h2 id="principles-heading" className="text-2xl">

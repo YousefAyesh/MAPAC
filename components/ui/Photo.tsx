@@ -1,5 +1,5 @@
 import NextImage from 'next/image'
-import type { Photo as PhotoData } from '@/data/photos'
+import type { Photo as PhotoData } from '@/lib/content/types'
 import { cn } from '@/lib/cn'
 
 /**

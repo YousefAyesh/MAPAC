@@ -24,8 +24,8 @@ export async function GovernanceSection() {
           ))}
         </dl>
         <Photo
-          photo={photos.meeting}
-          aspect="aspect-[3/4]"
+          photo={photos.planning}
+          aspect="aspect-[4/3]"
           sizes="(max-width: 1024px) 100vw, 20rem"
         />
       </div>

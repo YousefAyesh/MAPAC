@@ -1,5 +1,7 @@
 import { PersonCard } from '@/components/about/PersonCard'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photos } from '@/data/photos'
 import { content } from '@/lib/content'
 
 export async function LeadershipSection() {
@@ -36,6 +38,13 @@ export async function LeadershipSection() {
           </li>
         ))}
       </ul>
+
+      <Photo
+        photo={photos.dinnerRecognition}
+        aspect="aspect-[16/9]"
+        sizes="(max-width: 1024px) 100vw, 64rem"
+        className="mt-12"
+      />
 
       <h3 className="mt-12 text-lg">With thanks to our outgoing trustees</h3>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed">
