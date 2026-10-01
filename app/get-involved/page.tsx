@@ -55,8 +55,10 @@ export default function GetInvolvedPage() {
           ))}
         </div>
         <p className="mt-6 max-w-3xl text-sm leading-relaxed">
-          MAPAC&rsquo;s By Laws require voting members to pay dues. Send the form below and a
-          member of MAPAC will be in touch about joining.
+          MAPAC&rsquo;s By Laws require voting members to pay dues.{' '}
+          {configured
+            ? 'Send the form below and a member of MAPAC will be in touch about joining.'
+            : 'Get in touch using the details below and a member of MAPAC will be in touch about joining.'}
         </p>
       </Section>
 
