@@ -18,7 +18,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 5'] } },
   ],
   webServer: {
-    command: 'npm run build && npm run start -- --port 3101',
+    command: 'NEXT_PUBLIC_SITE_URL=http://localhost:3101 npm run build && npm run start -- --port 3101',
     url: 'http://localhost:3101',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
