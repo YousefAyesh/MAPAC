@@ -30,8 +30,8 @@ export default function DonatePage() {
             <div className="rounded-lg border border-border-subtle bg-surface p-6">
               <h2 className="text-lg">Donate by mail or phone</h2>
               <p className="mt-3 leading-relaxed">
-                Online donations are being set up. In the meantime, you can send a check to the
-                address below, or call us and we will take your donation directly.
+                Online donations are being set up. In the meantime you can send a check to the
+                address below, or call us to ask how else you can give.
               </p>
               <address className="mt-4 not-italic leading-relaxed">
                 {site.address.line1}
@@ -49,7 +49,7 @@ export default function DonatePage() {
 
         <div>
           <h2 className="text-lg">Prefer to mail a check?</h2>
-          <p className="mt-3 leading-relaxed">Make it payable to MAPAC and send it to:</p>
+          <p className="mt-3 leading-relaxed">Send it to:</p>
           <address className="mt-3 not-italic leading-relaxed">
             {site.address.line1}
             <br />

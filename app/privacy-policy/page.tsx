@@ -13,39 +13,55 @@ export default function PrivacyPolicyPage() {
     <Section>
       <h1 className="text-3xl">Privacy policy</h1>
       <Prose className="mt-8">
-        <h2>Information we collect</h2>
         <p>
-          MAPAC collects information you choose to give us through this website. That means the
-          name and email address you enter when joining our contact list, and the name, email
-          address, and any message you enter when you contact us or volunteer.
+          This policy describes what this website does. It is written to match how the site
+          actually works rather than to make commitments on MAPAC&rsquo;s behalf; MAPAC may
+          wish to have it reviewed and expanded by counsel.
         </p>
 
-        <h2>How we use it</h2>
+        <h2>What this site collects</h2>
         <p>
-          We use your contact details to send you MAPAC news and updates and to respond to what
-          you wrote to us. We do not sell your information, and we do not share it with third
-          parties except the service providers who deliver our email and process our donations on
-          our behalf.
+          Only what you type into one of its two forms. The contact-list form asks for your
+          name and email address. The get-involved form asks for your name, email address,
+          how you would like to take part, and optionally your phone number and a message.
+          The site asks for nothing else and collects nothing automatically.
+        </p>
+
+        <h2>Where it goes</h2>
+        <p>
+          Form submissions are sent by email to{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> and are not stored on this
+          website or in any database. The email is delivered by a third-party email
+          service acting on MAPAC&rsquo;s behalf. Your details therefore live in
+          MAPAC&rsquo;s email inbox, and how long they are kept is a matter of
+          MAPAC&rsquo;s own record-keeping.
+        </p>
+
+        <h2>Cookies and tracking</h2>
+        <p>
+          This site sets no cookies, and includes no analytics, advertising or tracking
+          scripts of any kind.
         </p>
 
         <h2>Donations</h2>
         <p>
-          Donations are processed by Stripe. Your card details are entered on Stripe&rsquo;s own
-          secure pages and are never received or stored by MAPAC or by this website.
+          Donations are processed by Stripe. Card details are entered on Stripe&rsquo;s own
+          pages and are never received or stored by this website or by MAPAC. Stripe
+          handles that information under its own privacy policy.
         </p>
 
-        <h2>Unsubscribing and removal</h2>
+        <h2>Asking us to remove your details</h2>
         <p>
-          Every email we send includes an unsubscribe link. To have your information removed
-          entirely, email us at <a href={`mailto:${site.email}`}>{site.email}</a> and we will
-          delete it.
+          Email <a href={`mailto:${site.email}`}>{site.email}</a> and ask, or write to us at
+          the address below. Because this website stores nothing, any request concerns the
+          records MAPAC holds.
         </p>
 
-        <h2>Contact</h2>
+        <h2>Questions</h2>
         <p>
-          Questions about this policy can be sent to{' '}
-          <a href={`mailto:${site.email}`}>{site.email}</a>, or by mail to {site.address.line1},{' '}
-          {site.address.line2}.
+          Send questions about this policy to{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a>, or by mail to{' '}
+          {site.address.line1}, {site.address.line2}.
         </p>
       </Prose>
     </Section>

@@ -18,8 +18,8 @@ export default async function ThankYouPage({ searchParams }: Props) {
       <h1 className="text-3xl">Thank you for your support</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed">
         {monthly
-          ? 'Your monthly donation is set up. Stripe will email you a receipt for each payment, and you can cancel at any time.'
-          : 'Your donation has been received. Stripe will email you a receipt.'}
+          ? 'Your monthly donation is set up. To change or cancel it, email us and we will take care of it.'
+          : 'Your donation has been received.'}
       </p>
       <p className="mt-4 max-w-2xl leading-relaxed">
         Your contribution funds MAPAC&rsquo;s advocacy, candidate evaluation, and civic education

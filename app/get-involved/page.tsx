@@ -55,8 +55,8 @@ export default function GetInvolvedPage() {
           ))}
         </div>
         <p className="mt-6 max-w-3xl text-sm leading-relaxed">
-          Dues and current membership terms are set by the By Laws. Send the form below and MAPAC
-          will confirm the current rate and how to pay.
+          MAPAC&rsquo;s By Laws require voting members to pay dues. Send the form below and a
+          member of MAPAC will be in touch about joining.
         </p>
       </Section>
 

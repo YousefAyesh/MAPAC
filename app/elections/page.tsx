@@ -124,8 +124,8 @@ export default async function ElectionsPage() {
           Researching candidates yourself
         </h2>
         <p className="mt-3 max-w-3xl leading-relaxed">
-          You do not have to take anyone&rsquo;s word for it. These are the tools MAPAC uses to
-          research candidates&rsquo; backgrounds, policies, and public records.
+          MAPAC&rsquo;s endorsement guide lists these tools and sources for researching a
+          candidate&rsquo;s background, policies, and public record.
         </p>
         <ResearchResources />
       </Section>
