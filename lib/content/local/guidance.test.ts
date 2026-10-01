@@ -49,4 +49,11 @@ describe('research categories', () => {
     expect(urls.length).toBeGreaterThan(0)
     expect(urls.every((u) => u!.startsWith('https://'))).toBe(true)
   })
+
+  it('keeps FiveThirtyEight as a label without a link, since the site is defunct', async () => {
+    const links = (await content.getResearchCategories()).flatMap((c) => c.links)
+    const link = links.find((l) => l.label === 'FiveThirtyEight')
+    expect(link).toBeDefined()
+    expect(link!.url).toBeUndefined()
+  })
 })

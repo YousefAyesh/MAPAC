@@ -145,7 +145,9 @@ export const researchCategories: ResearchCategory[] = [
     title: 'Political analysis sites',
     description: 'In-depth analysis of election data, polling, and political trends.',
     links: [
-      { label: 'FiveThirtyEight', url: 'https://projects.fivethirtyeight.com' },
+      // ABC shut FiveThirtyEight down in March 2025. The endorsement guide still lists it, so
+      // the label stays (faithful to the guide) but the dead link does not.
+      { label: 'FiveThirtyEight' },
       { label: 'The Cook Political Report', url: 'https://www.cookpolitical.com' },
     ],
   },
