@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { GetInvolvedForm } from '@/components/forms/GetInvolvedForm'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 import { Card } from '@/components/ui/Card'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photos } from '@/data/photos'
 import { isEmailConfigured } from '@/lib/email'
 
 export const metadata: Metadata = {
@@ -46,13 +48,20 @@ export default function GetInvolvedPage() {
         <p className="mt-3 max-w-3xl leading-relaxed">
           MAPAC&rsquo;s General Body is made up of two groups.
         </p>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {MEMBERSHIP.map((tier) => (
-            <Card key={tier.id}>
-              <h3 className="text-lg">{tier.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed">{tier.body}</p>
-            </Card>
-          ))}
+        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-start">
+          <div className="grid gap-5 md:grid-cols-2">
+            {MEMBERSHIP.map((tier) => (
+              <Card key={tier.id}>
+                <h3 className="text-lg">{tier.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed">{tier.body}</p>
+              </Card>
+            ))}
+          </div>
+          <Photo
+            photo={photos.conversation}
+            aspect="aspect-[3/4]"
+            sizes="(max-width: 1024px) 100vw, 18rem"
+          />
         </div>
         <p className="mt-6 max-w-3xl text-sm leading-relaxed">
           MAPAC&rsquo;s By Laws require voting members to pay dues.{' '}

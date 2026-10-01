@@ -1,5 +1,7 @@
 import { Card } from '@/components/ui/Card'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photos } from '@/data/photos'
 import { content } from '@/lib/content'
 
 export async function PillarsRow() {
@@ -7,6 +9,12 @@ export async function PillarsRow() {
 
   return (
     <Section tinted aria-labelledby="pillars-heading">
+      <Photo
+        photo={photos.forumBanner}
+        aspect="aspect-[16/9]"
+        sizes="(max-width: 1024px) 100vw, 64rem"
+        className="mb-12"
+      />
       <h2 id="pillars-heading" className="text-2xl">
         How MAPAC works
       </h2>
