@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MAPAC Website
 
-## Getting Started
+The website for the Muslim American Public Affairs Council (mapacnc.com).
 
-First, run the development server:
+Next.js 15 (App Router), TypeScript, Tailwind CSS v4. Content lives in this repo; no CMS.
+
+## Running it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Verifying it
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run verify   # lint, typecheck, unit tests, e2e tests, accessibility
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`npm run test:e2e` includes an axe-core accessibility gate on every route. It fails the
+build on any WCAG A or AA violation.
 
-## Learn More
+## Editing content
 
-To learn more about Next.js, take a look at the following resources:
+All site content is in `data/` and `content/`. Components never read these directly —
+they go through `lib/content`, so content can later move to a CMS without touching any
+component.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| What | Where |
+| --- | --- |
+| Address, phone, email, social links | `data/site.ts` |
+| The eight goals | `data/goals.ts` |
+| Board and Executive Committee roster | `data/leadership.ts` |
+| Governance body descriptions | `data/governance.ts` |
+| Endorsement principles, criteria, rubrics | `data/endorsement.ts` |
+| Published endorsements | `data/endorsements.ts` |
+| News and press releases | `content/news/*.mdx` |
+| Navigation | `data/nav.ts` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Publishing an endorsement
 
-## Deploy on Vercel
+Add an entry to the array in `data/endorsements.ts`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+{
+  id: 'jane-smith-2026',
+  candidate: 'Jane Smith',
+  office: 'NC House District 11',
+  cycle: 'November 2026 General',
+  date: '2026-10-08',
+  statementUrl: 'https://example.org/statement',
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+While that array is empty the Elections page shows no endorsements section at all. That
+is deliberate: it is what stops the site from ever displaying a stale election page.
+
+### Publishing a news post
+
+Create `content/news/my-post.mdx`:
+
+```mdx
+---
+title: MAPAC Statement on Voter Access
+date: 2026-10-01
+summary: One or two sentences for the index page.
+---
+
+The body of the statement, in Markdown.
+```
+
+The filename becomes the URL. `title`, `date` and `summary` are required.
+
+### Updating the leadership roster
+
+Edit `data/leadership.ts`. Change `leadershipYear` at the same time — the About page
+labels the roster with it, so the year and the names must not drift apart.
+
+## Environment variables
+
+Copy `.env.example` to `.env.local`. **Every integration degrades gracefully when its
+variable is missing**, so the site deploys and works before any of these exist — this is
+how it will actually ship: with none of them set.
+
+| Variable | Without it |
+| --- | --- |
+| `RESEND_API_KEY` | Forms are replaced by the email address and phone number |
+| `CONTACT_TO_EMAIL` | Defaults to `mail@mapacnc.com` |
+| `STRIPE_SECRET_KEY` | Donate page shows the mail-a-check path, no dead button |
+| `STRIPE_RECURRING_PRICE_ID` | Monthly giving is disabled; one-time still works |
+| `STRIPE_WEBHOOK_SECRET` | Webhook returns "not configured" instead of failing |
+| `NEXT_PUBLIC_SITE_URL` | Defaults to `http://localhost:3000`; set this in production |
+
+### Stripe setup
+
+1. In the Stripe dashboard, create a recurring Price (monthly, any amount — the amount is
+   overridden per donation) and put its id in `STRIPE_RECURRING_PRICE_ID`.
+2. Add a webhook endpoint at `https://<your-domain>/api/stripe/webhook` subscribed to
+   `checkout.session.completed`, `invoice.paid`, and `customer.subscription.deleted`.
+   Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
+
+Donation amounts are validated server-side in `lib/donation.ts`. The client's amount is
+never trusted. Minimum $1, maximum $25,000.
+
+## Adding a CMS later
+
+`lib/content/source.ts` defines the `ContentSource` interface. To move to Sanity, add
+`lib/content/sanity/` implementing that interface and change the one assignment in
+`lib/content/index.ts`. No component changes.
+
+## Outstanding items
+
+See `docs/superpowers/specs/2026-09-25-mapac-website-design.md`, "Open items for MAPAC".
+Most urgent: confirm the current leadership roster (the site ships the 2025 slate, clearly
+labelled) and confirm the P.O. Box ZIP, which the old site and the endorsement guide PDF
+disagree on (27619 vs 27606).
