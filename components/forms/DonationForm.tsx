@@ -7,7 +7,7 @@ import { PRESET_AMOUNTS } from '@/lib/donation'
 
 type Frequency = 'once' | 'monthly'
 
-export function DonationForm({ recurringAvailable }: { recurringAvailable: boolean }) {
+export function DonationForm() {
   const [frequency, setFrequency] = useState<Frequency>('once')
   const [amount, setAmount] = useState<string>('100')
   const [custom, setCustom] = useState('')
@@ -49,7 +49,6 @@ export function DonationForm({ recurringAvailable }: { recurringAvailable: boole
         <legend className="text-sm font-medium text-navy">How often</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {(['once', 'monthly'] as const).map((value) => {
-            const disabled = value === 'monthly' && !recurringAvailable
             return (
               <label
                 key={value}
@@ -57,14 +56,13 @@ export function DonationForm({ recurringAvailable }: { recurringAvailable: boole
                   frequency === value
                     ? 'border-crimson bg-crimson text-white'
                     : 'border-border-subtle bg-white text-navy'
-                } ${disabled ? 'cursor-not-allowed opacity-50' : ''}`}
+                }`}
               >
                 <input
                   type="radio"
                   name="frequency"
                   value={value}
                   checked={frequency === value}
-                  disabled={disabled}
                   onChange={() => setFrequency(value)}
                   className="sr-only"
                 />
@@ -73,9 +71,6 @@ export function DonationForm({ recurringAvailable }: { recurringAvailable: boole
             )
           })}
         </div>
-        {!recurringAvailable && (
-          <p className="mt-2 text-xs text-body">Monthly giving is not available right now.</p>
-        )}
       </fieldset>
 
       <fieldset>

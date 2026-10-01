@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { parseAmountToCents } from '@/lib/donation'
 import { checkRateLimit, clientIp } from '@/lib/rate-limit'
-import { getStripe, isRecurringConfigured, isStripeConfigured, siteUrl } from '@/lib/stripe'
+import { getStripe, isStripeConfigured, siteUrl } from '@/lib/stripe'
 
 export const runtime = 'nodejs'
 
@@ -40,13 +40,6 @@ export async function POST(request: Request) {
   const parsed = parseAmountToCents(payload.amount)
   if (!parsed.ok) {
     return NextResponse.json({ message: parsed.message }, { status: 400 })
-  }
-
-  if (frequency === 'monthly' && !isRecurringConfigured()) {
-    return NextResponse.json(
-      { message: 'Monthly giving is not available right now. Please make a one-time donation.' },
-      { status: 503 },
-    )
   }
 
   const base = siteUrl()

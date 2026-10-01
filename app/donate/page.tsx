@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { DonationForm } from '@/components/forms/DonationForm'
 import { Section } from '@/components/ui/Section'
 import { site } from '@/data/site'
-import { isRecurringConfigured, isStripeConfigured } from '@/lib/stripe'
+import { isStripeConfigured } from '@/lib/stripe'
 
 export const metadata: Metadata = {
   title: 'Donate',
@@ -25,7 +25,7 @@ export default function DonatePage() {
       <div className="mt-10 grid gap-12 lg:grid-cols-2">
         <div>
           {stripeReady ? (
-            <DonationForm recurringAvailable={isRecurringConfigured()} />
+            <DonationForm />
           ) : (
             <div className="rounded-lg border border-border-subtle bg-surface p-6">
               <h2 className="text-lg">Donate by mail or phone</h2>

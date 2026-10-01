@@ -13,7 +13,6 @@ const createSession = vi.fn<(params: SessionCreateArgs) => Promise<{ url: string
 
 vi.mock('@/lib/stripe', () => ({
   isStripeConfigured: () => true,
-  isRecurringConfigured: () => true,
   siteUrl: () => 'https://example.org',
   getStripe: () => ({ checkout: { sessions: { create: createSession } } }),
 }))

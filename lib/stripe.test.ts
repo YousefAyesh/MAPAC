@@ -23,18 +23,19 @@ describe('stripe configuration', () => {
     expect(isStripeConfigured()).toBe(true)
   })
 
-  it('reports recurring unavailable without a price id, even with a secret key', async () => {
+  it('does not gate monthly giving on a separate Price id', async () => {
+    // Monthly subscriptions are built from inline price_data in the checkout route, so
+    // no predefined Stripe Price is needed. A secret key alone enables everything.
     process.env.STRIPE_SECRET_KEY = 'sk_test_x'
     delete process.env.STRIPE_RECURRING_PRICE_ID
-    const { isRecurringConfigured } = await import('./stripe')
-    expect(isRecurringConfigured()).toBe(false)
+    const { isStripeConfigured } = await import('./stripe')
+    expect(isStripeConfigured()).toBe(true)
   })
 
-  it('reports recurring available with both a key and a price id', async () => {
+  it('no longer exports a separate recurring-configured check', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_x'
-    process.env.STRIPE_RECURRING_PRICE_ID = 'price_123'
-    const { isRecurringConfigured } = await import('./stripe')
-    expect(isRecurringConfigured()).toBe(true)
+    const stripe = await import('./stripe')
+    expect('isRecurringConfigured' in stripe).toBe(false)
   })
 
   it('throws a clear error if the client is requested while unconfigured', async () => {

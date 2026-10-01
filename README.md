@@ -87,14 +87,14 @@ how it will actually ship: with none of them set.
 | `RESEND_API_KEY` | Forms are replaced by the email address and phone number |
 | `CONTACT_TO_EMAIL` | Defaults to `mail@mapacnc.com` |
 | `STRIPE_SECRET_KEY` | Donate page shows the mail-a-check path, no dead button |
-| `STRIPE_RECURRING_PRICE_ID` | Monthly giving is disabled; one-time still works |
 | `STRIPE_WEBHOOK_SECRET` | Webhook returns "not configured" instead of failing |
 | `NEXT_PUBLIC_SITE_URL` | Defaults to `http://localhost:3000`; set this in production |
 
 ### Stripe setup
 
-1. In the Stripe dashboard, create a recurring Price (monthly, any amount — the amount is
-   overridden per donation) and put its id in `STRIPE_RECURRING_PRICE_ID`.
+1. Put the secret key in `STRIPE_SECRET_KEY`. One-time and monthly giving both turn on
+   with it; monthly gifts are created with inline pricing, so no Price needs to exist in the
+   Stripe dashboard.
 2. Add a webhook endpoint at `https://<your-domain>/api/stripe/webhook` subscribed to
    `checkout.session.completed`, `invoice.paid`, and `customer.subscription.deleted`.
    Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
