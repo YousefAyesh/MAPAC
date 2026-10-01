@@ -22,6 +22,6 @@ export function getStripe(): Stripe {
   return client
 }
 
-export function siteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
-}
+// siteUrl lives in lib/site-url.ts; re-exported here only so existing Stripe callers
+// keep a single import. New callers should import from '@/lib/site-url' directly.
+export { siteUrl } from './site-url'

@@ -289,6 +289,7 @@ Replace the file with:
 ```tsx
 import type { Metadata } from 'next'
 import { inter, sourceSerif } from '@/lib/fonts'
+import { siteUrl } from '@/lib/site-url'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -2440,10 +2441,8 @@ import { site } from '@/data/site'
 import { inter, sourceSerif } from '@/lib/fonts'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteUrl()),
   title: {
     default: `${site.name} (${site.shortName})`,
     template: `%s | ${site.shortName}`,
@@ -5301,9 +5300,10 @@ export function getStripe(): Stripe {
   return client
 }
 
-export function siteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
-}
+// siteUrl lives in its own module, lib/site-url.ts, so that sitemap.ts and robots.ts
+// do not pull the Stripe SDK in just to read an environment variable. Re-exported here
+// for existing Stripe callers.
+export { siteUrl } from './site-url'
 ```
 
 - [ ] **Step 5: Run test to verify it passes**
@@ -6232,7 +6232,7 @@ a screen reader announce MAPAC twice.
 ```ts
 import type { MetadataRoute } from 'next'
 import { content } from '@/lib/content'
-import { siteUrl } from '@/lib/stripe'
+import { siteUrl } from '@/lib/site-url'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl()
@@ -6266,7 +6266,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 ```ts
 import type { MetadataRoute } from 'next'
-import { siteUrl } from '@/lib/stripe'
+import { siteUrl } from '@/lib/site-url'
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -3,13 +3,12 @@ import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { SkipLink } from '@/components/layout/SkipLink'
 import { site } from '@/data/site'
+import { siteUrl } from '@/lib/site-url'
 import { inter, sourceSerif } from '@/lib/fonts'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteUrl()),
   title: {
     default: `${site.name} (${site.shortName})`,
     template: `%s | ${site.shortName}`,

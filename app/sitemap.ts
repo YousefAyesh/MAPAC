@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { content } from '@/lib/content'
-import { siteUrl } from '@/lib/stripe'
+import { siteUrl } from '@/lib/site-url'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl()
