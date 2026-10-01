@@ -60,16 +60,20 @@ test.describe('navigation', () => {
     await expect(first).toHaveAttribute('aria-expanded', 'true')
   })
 
-  test('no page scrolls horizontally at phone width', async ({ page }) => {
-    await page.setViewportSize({ width: 400, height: 800 })
-    for (const route of ROUTES) {
+  // One test per route rather than one test looping all eight. Eight sequential
+  // page.goto calls sharing a single 30s budget is a coin flip on a loaded machine,
+  // and a gate that fails randomly is a gate people stop trusting. Per-route tests
+  // each get their own budget, and a failure names the offending route.
+  for (const route of ROUTES) {
+    test(`${route} does not scroll horizontally at phone width`, async ({ page }) => {
+      await page.setViewportSize({ width: 400, height: 800 })
       await page.goto(route)
       const overflows = await page.evaluate(
         () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       )
       expect(overflows, `${route} must not scroll horizontally at 400px`).toBe(false)
-    }
-  })
+    })
+  }
 })
 
 test.describe('mobile navigation', () => {

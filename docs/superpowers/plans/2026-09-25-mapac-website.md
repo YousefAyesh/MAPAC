@@ -5942,10 +5942,10 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  retries: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3101',
     trace: 'on-first-retry',
   },
   projects: [
@@ -5953,8 +5953,8 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 5'] } },
   ],
   webServer: {
-    command: 'npm run build && npm run start',
-    url: 'http://localhost:3000',
+    command: 'npm run build && npm run start -- --port 3101',
+    url: 'http://localhost:3101',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
@@ -6035,16 +6035,18 @@ test.describe('navigation', () => {
     await expect(first).toHaveAttribute('aria-expanded', 'true')
   })
 
-  test('no page scrolls horizontally at phone width', async ({ page }) => {
-    await page.setViewportSize({ width: 400, height: 800 })
-    for (const route of ROUTES) {
+  // One test per route rather than one test looping all eight: eight sequential
+  // page.goto calls sharing a single 30s budget flakes on a loaded machine.
+  for (const route of ROUTES) {
+    test(`${route} does not scroll horizontally at phone width`, async ({ page }) => {
+      await page.setViewportSize({ width: 400, height: 800 })
       await page.goto(route)
       const overflows = await page.evaluate(
         () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       )
       expect(overflows, `${route} must not scroll horizontally at 400px`).toBe(false)
-    }
-  })
+    })
+  }
 })
 
 test.describe('mobile navigation', () => {

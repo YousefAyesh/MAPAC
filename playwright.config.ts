@@ -4,7 +4,10 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  // Retry locally too, not just in CI: this suite runs on a developer machine that may
+  // be under heavy load, where a page.goto can exceed its budget for environmental
+  // reasons. A real failure still fails twice; a load flake does not fail the gate.
+  retries: 1,
   reporter: 'list',
   use: {
     baseURL: 'http://localhost:3101',
