@@ -119,4 +119,6 @@ export type Photo = {
   height: number
   /** Grouping label used by the gallery. */
   group: string
+  /** Photographer credit, where the image carries one. */
+  credit?: string
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
-import { DINNER_PHOTO_CREDIT, galleryPhotos } from '@/data/photos'
+import { PHOTO_CREDIT, galleryPhotos } from '@/data/photos'
 
 export const metadata: Metadata = {
   title: 'Gallery',
@@ -43,7 +43,7 @@ export default function GalleryPage() {
         </section>
       ))}
 
-      <p className="mt-12 text-sm text-body">{DINNER_PHOTO_CREDIT}</p>
+      <p className="mt-12 text-sm text-body">{PHOTO_CREDIT}</p>
     </Section>
   )
 }

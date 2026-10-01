@@ -1,6 +1,6 @@
 import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
-import { photos } from '@/data/photos'
+import { photo } from '@/data/photos'
 import { content } from '@/lib/content'
 
 export async function GovernanceSection() {
@@ -24,7 +24,7 @@ export async function GovernanceSection() {
           ))}
         </dl>
         <Photo
-          photo={photos.planning}
+          photo={photo.planning_session}
           aspect="aspect-[4/3]"
           sizes="(max-width: 1024px) 100vw, 20rem"
         />

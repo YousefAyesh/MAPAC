@@ -4,7 +4,7 @@ import { NewsletterForm } from '@/components/forms/NewsletterForm'
 import { Card } from '@/components/ui/Card'
 import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
-import { photos } from '@/data/photos'
+import { photo } from '@/data/photos'
 import { isEmailConfigured } from '@/lib/email'
 
 export const metadata: Metadata = {
@@ -58,7 +58,7 @@ export default function GetInvolvedPage() {
             ))}
           </div>
           <Photo
-            photo={photos.conversation}
+            photo={photo.community_conversation}
             aspect="aspect-[3/4]"
             sizes="(max-width: 1024px) 100vw, 18rem"
           />

@@ -7,7 +7,7 @@ import { RubricTable } from '@/components/elections/RubricTable'
 import { Button } from '@/components/ui/Button'
 import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
-import { photos } from '@/data/photos'
+import { photo } from '@/data/photos'
 import { content } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default async function ElectionsPage() {
           MAPAC at work
         </h2>
         <Photo
-          photo={photos.dinnerHallFlags}
+          photo={photo.forum_panel_wide}
           aspect="aspect-[21/9]"
           sizes="(max-width: 1024px) 100vw, 64rem"
         />
