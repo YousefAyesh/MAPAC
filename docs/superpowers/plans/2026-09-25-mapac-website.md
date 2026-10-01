@@ -55,7 +55,7 @@
 ### Task 1: Scaffold the project
 
 **Files:**
-- Create: `package.json`, `tsconfig.json`, `next.config.ts`, `vitest.config.ts`, `.env.example`, `.gitignore`
+- Create: `package.json`, `tsconfig.json`, `next.config.ts`, `vitest.config.mts`, `.env.example`, `.gitignore`
 - Create: `app/layout.tsx`, `app/page.tsx`, `app/globals.css`
 
 - [ ] **Step 1: Create the Next.js app in place**
@@ -96,7 +96,10 @@ Note `zod` is a runtime dependency, not a dev one — move it:
 npm install zod
 ```
 
-- [ ] **Step 4: Create `vitest.config.ts`**
+- [ ] **Step 4: Create `vitest.config.mts`**
+
+Note the `.mts` extension: the file uses ESM syntax and `package.json` has no
+`"type": "module"`, so a plain `.ts` config is loaded as CommonJS and warns.
 
 ```ts
 import { defineConfig } from 'vitest/config'
@@ -106,6 +109,13 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
+    // 'threads' starts far cheaper than the default 'forks'. Under machine load,
+    // forked workers timed out before responding, so whole test files silently never
+    // ran while the run still reported the tests that did as passing.
+    pool: 'threads',
+    maxWorkers: 4,
+    testTimeout: 15000,
+    hookTimeout: 15000,
     environment: 'jsdom',
     globals: true,
     include: ['**/*.test.ts', '**/*.test.tsx'],

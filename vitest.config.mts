@@ -10,7 +10,10 @@ export default defineConfig({
     // never ran at all -- which reads as a pass/fail ambiguity rather than a clear
     // signal. Threads plus a worker cap keeps the suite deterministic under load.
     pool: 'threads',
-    poolOptions: { threads: { maxThreads: 4, minThreads: 1 } },
+    // Vitest 4 replaced poolOptions.threads with a top-level maxWorkers (there is
+    // no minWorkers). tsc catches a wrong key here; `vitest run` does not, since it
+    // never typechecks its own config.
+    maxWorkers: 4,
     testTimeout: 15000,
     hookTimeout: 15000,
     environment: 'jsdom',
