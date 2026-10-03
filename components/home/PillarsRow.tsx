@@ -10,7 +10,7 @@ export async function PillarsRow() {
   return (
     <Section tinted aria-labelledby="pillars-heading">
       <Photo
-        photo={photo.community_forum_banner}
+        photo={photo.forum_2022_panel}
         aspect="aspect-[16/9]"
         sizes="(max-width: 1024px) 100vw, 64rem"
         className="mb-12"

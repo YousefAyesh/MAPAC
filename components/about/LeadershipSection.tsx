@@ -40,7 +40,7 @@ export async function LeadershipSection() {
       </ul>
 
       <Photo
-        photo={photo.dinner_recognition}
+        photo={photo.dinner_keynote}
         aspect="aspect-[16/9]"
         sizes="(max-width: 1024px) 100vw, 64rem"
         className="mt-12"
