@@ -7,17 +7,17 @@ describe('goals', () => {
     expect(goals).toHaveLength(8)
   })
 
-  it('preserves the lobbying goal verbatim', async () => {
+  it('preserves the engagement goal verbatim', async () => {
     const goals = await content.getGoals()
     expect(goals.map((g) => g.text)).toContain(
-      'Lobby Politicians at all levels within the US political system.',
+      'Engage with politicians at all levels within the US political system.',
     )
   })
 
   it('includes the two goals the old home page omitted', async () => {
     const texts = (await content.getGoals()).map((g) => g.text)
     expect(texts).toContain(
-      'Strive for assurance of basic human rights of all Americans and of all Muslims.',
+      'Aim for assurance of basic human rights of all Americans and of all Muslims.',
     )
     expect(texts).toContain(
       'Strive to eliminate in the American society any vestiges of discrimination on the basis of race, gender, religion or ethnicity.',
