@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { DonationForm } from '@/components/forms/DonationForm'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photo } from '@/data/photos'
 import { site } from '@/data/site'
 import { isStripeConfigured } from '@/lib/stripe'
 
@@ -71,6 +73,12 @@ export default function DonatePage() {
             </a>
             .
           </p>
+          <Photo
+            photo={photo.iftar_guests}
+            aspect="aspect-[4/3]"
+            sizes="(max-width: 1024px) 100vw, 30rem"
+            className="mt-8"
+          />
         </div>
       </div>
     </Section>

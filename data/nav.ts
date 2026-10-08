@@ -9,12 +9,12 @@ export const primaryNav: NavItem[] = [
   { label: 'Elections', href: '/elections' },
   { label: 'Get Involved', href: '/get-involved' },
   { label: 'News', href: '/news' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Donate', href: '/donate' },
   { label: 'Contact', href: '/contact' },
 ]
 
 export const footerNav: NavItem[] = [
   ...primaryNav,
-  { label: 'Gallery', href: '/gallery' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
 ]

@@ -2,12 +2,13 @@ import { describe, it, expect } from 'vitest'
 import { primaryNav, footerNav } from './nav'
 
 describe('primaryNav', () => {
-  it('is the consolidated seven-item nav from the spec', () => {
+  it('is the seven-item nav, with Gallery promoted from the footer', () => {
     expect(primaryNav.map((i) => i.label)).toEqual([
       'About',
       'Elections',
       'Get Involved',
       'News',
+      'Gallery',
       'Donate',
       'Contact',
     ])

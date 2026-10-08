@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photo } from '@/data/photos'
 import { site } from '@/data/site'
 import { content } from '@/lib/content'
 import { formatDate } from '@/lib/formatDate'
@@ -18,6 +20,12 @@ export default async function NewsPage() {
       <h1 id="news-heading" className="text-3xl">
         News &amp; press releases
       </h1>
+      <Photo
+        photo={photo.forum_2018_hall}
+        aspect="aspect-[3/1]"
+        sizes="(max-width: 1024px) 100vw, 64rem"
+        className="mt-8"
+      />
 
       {posts.length === 0 ? (
         <div className="mt-8 max-w-2xl rounded-lg border border-border-subtle bg-surface p-8">

@@ -39,6 +39,12 @@ export default function GetInvolvedPage() {
           MAPAC&rsquo;s work depends on the community it represents. Join as a member, volunteer on
           a committee, or sign up for our contact list to stay informed.
         </p>
+        <Photo
+          photo={photo.iftar_tables}
+          aspect="aspect-[21/9]"
+          sizes="(max-width: 1024px) 100vw, 64rem"
+          className="mt-10"
+        />
       </Section>
 
       <Section tinted aria-labelledby="membership-heading">

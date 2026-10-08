@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { GetInvolvedForm } from '@/components/forms/GetInvolvedForm'
+import { Photo } from '@/components/ui/Photo'
 import { Section } from '@/components/ui/Section'
+import { photo } from '@/data/photos'
 import { site } from '@/data/site'
 import { isEmailConfigured } from '@/lib/email'
 
@@ -28,65 +30,72 @@ export default function ContactPage() {
         We&rsquo;re here to listen, support, and collaborate with you.
       </p>
 
-      <div className="mt-10 grid gap-8 sm:grid-cols-2">
-        <div>
-          <h2 className="text-lg">By mail</h2>
-          <address className="mt-2 not-italic leading-relaxed">
-            {site.address.line1}
-            <br />
-            {site.address.line2}
-          </address>
-          <a
-            href={site.address.mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block text-sm font-medium text-crimson-deep underline"
-          >
-            View on Google Maps
-          </a>
-        </div>
-
-        <div>
-          <h2 className="text-lg">By phone and email</h2>
-          <p className="mt-2 leading-relaxed">
-            <a href={site.phoneHref} className="font-medium text-crimson-deep underline">
-              {site.phone}
+      <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_22rem] lg:items-start">
+        <div className="grid gap-8 sm:grid-cols-2">
+          <div>
+            <h2 className="text-lg">By mail</h2>
+            <address className="mt-2 not-italic leading-relaxed">
+              {site.address.line1}
+              <br />
+              {site.address.line2}
+            </address>
+            <a
+              href={site.address.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-sm font-medium text-crimson-deep underline"
+            >
+              View on Google Maps
             </a>
-            <br />
-            <a href={`mailto:${site.email}`} className="font-medium text-crimson-deep underline">
-              {site.email}
-            </a>
-          </p>
-        </div>
-
-        <div className="sm:col-span-2">
-          <h2 className="text-lg">Follow MAPAC</h2>
-          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-            {SOCIAL.map((s) => (
-              <li key={s.label}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-crimson-deep underline"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Without an email provider the form's fallback would just repeat the phone and
-            email shown above, so the section is omitted entirely in that state. */}
-        {configured && (
-          <div className="sm:col-span-2">
-            <h2 className="text-lg">Send us a message</h2>
-            <div className="mt-4 max-w-xl">
-              <GetInvolvedForm configured />
-            </div>
           </div>
-        )}
+
+          <div>
+            <h2 className="text-lg">By phone and email</h2>
+            <p className="mt-2 leading-relaxed">
+              <a href={site.phoneHref} className="font-medium text-crimson-deep underline">
+                {site.phone}
+              </a>
+              <br />
+              <a href={`mailto:${site.email}`} className="font-medium text-crimson-deep underline">
+                {site.email}
+              </a>
+            </p>
+          </div>
+
+          <div className="sm:col-span-2">
+            <h2 className="text-lg">Follow MAPAC</h2>
+            <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+              {SOCIAL.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-crimson-deep underline"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Without an email provider the form's fallback would just repeat the phone and
+              email shown above, so the section is omitted entirely in that state. */}
+          {configured && (
+            <div className="sm:col-span-2">
+              <h2 className="text-lg">Send us a message</h2>
+              <div className="mt-4 max-w-xl">
+                <GetInvolvedForm configured />
+              </div>
+            </div>
+          )}
+        </div>
+        <Photo
+          photo={photo.planning_group_a}
+          aspect="aspect-[4/3]"
+          sizes="(max-width: 1024px) 100vw, 22rem"
+        />
       </div>
     </Section>
   )
