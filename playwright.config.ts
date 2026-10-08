@@ -22,5 +22,7 @@ export default defineConfig({
     url: 'http://localhost:3101',
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    // Read only data/, so the suite does not change when MAPAC publishes in Sanity.
+    env: { SANITY_DISABLED: '1' },
   },
 })

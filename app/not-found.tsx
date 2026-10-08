@@ -1,8 +1,11 @@
+import { SiteChrome } from '@/components/layout/SiteChrome'
 import { Button } from '@/components/ui/Button'
 import { Section } from '@/components/ui/Section'
 
+// Unmatched URLs render under the root layout, which has no chrome, so add it here.
 export default function NotFound() {
   return (
+    <SiteChrome>
     <Section>
       <p className="font-serif text-sm font-semibold uppercase tracking-widest text-crimson">
         404
@@ -18,5 +21,6 @@ export default function NotFound() {
         </Button>
       </div>
     </Section>
+    </SiteChrome>
   )
 }

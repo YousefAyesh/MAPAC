@@ -7,6 +7,7 @@ import type {
   NewsItem,
   OfficeGuidance,
   Person,
+  Photo,
   Pillar,
   Principle,
   ResearchCategory,
@@ -16,8 +17,8 @@ import type {
 
 /**
  * The single contract every content backend implements. The local backend reads
- * `data/` and `content/`. A future Sanity backend implements this same interface,
- * and `lib/content/index.ts` switches which one is exported.
+ * `data/` and `content/`; `lib/content/sanity/` layers MAPAC-edited endorsements and
+ * gallery photos on top of it.
  */
 export type ContentSource = {
   getGoals(): Promise<Goal[]>
@@ -53,6 +54,8 @@ export type ContentSource = {
   getUpcomingEvents(): Promise<EventItem[]>
   /** Empty array means the Elections page renders no endorsements section. */
   getEndorsements(): Promise<Endorsement[]>
+  /** Every gallery photograph, in display order. Groups appear in first-seen order. */
+  getGalleryPhotos(): Promise<Photo[]>
   /** Newest first. Bodies omitted. */
   getNews(): Promise<NewsItem[]>
   /** Null when no post has that slug. */

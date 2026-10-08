@@ -17,6 +17,8 @@ export default defineConfig({
     testTimeout: 15000,
     hookTimeout: 15000,
     environment: 'jsdom',
+    // Unit tests never reach the live Sanity API; the adapter's own tests stub fetch.
+    env: { SANITY_DISABLED: '1' },
     globals: true,
     include: ['**/*.test.ts', '**/*.test.tsx'],
     exclude: ['node_modules', '.next', 'e2e'],

@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     'How MAPAC evaluates and endorses candidates: our principles, the eight evaluation criteria, and the weighted scoring rubrics for each level of office.',
 }
 
+// Endorsements MAPAC publishes in Sanity appear within a minute. Must match REVALIDATE_SECONDS.
+export const revalidate = 60
+
 export default async function ElectionsPage() {
   const [principles, rubrics, scoringScale, disqualifications, requirement, guideUrl] =
     await Promise.all([

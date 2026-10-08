@@ -13,6 +13,7 @@ import { goals } from '@/data/goals'
 import { governanceBodies } from '@/data/governance'
 import { officeGuidance, researchCategories } from '@/data/guidance'
 import { leadershipYear, outgoingTrustees, trustees } from '@/data/leadership'
+import { galleryPhotos } from '@/data/photos'
 import { pillars } from '@/data/pillars'
 import type { ContentSource } from '../source'
 import { getNews, getNewsBySlug } from './news'
@@ -71,6 +72,9 @@ export const localSource: ContentSource = {
   },
   async getEndorsements() {
     return endorsements
+  },
+  async getGalleryPhotos() {
+    return galleryPhotos
   },
   getNews,
   getNewsBySlug,
